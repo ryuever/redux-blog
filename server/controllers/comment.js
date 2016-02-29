@@ -59,6 +59,7 @@ exports.postComment = function(req, res, next){
   }).then(function(comment){
 
     var ret = {
+      _id: comment._id,
       creatorName: comment.creatorName,
       content: comment.content,
       articleId: comment.articleId,
@@ -91,6 +92,7 @@ exports.getComments = function(req, res, next){
     if(comments){
       var tmp = comments.map(function(comment){
         var ret = {
+          _id: comment._id,
           creatorName: comment.creatorName,
           content: comment.content,
           articleId: comment.articleId,
@@ -101,7 +103,6 @@ exports.getComments = function(req, res, next){
         };
         return ret;
       });
-      console.log("fetch comments : ", tmp);
       res.status(200).send(tmp);
     }
   })

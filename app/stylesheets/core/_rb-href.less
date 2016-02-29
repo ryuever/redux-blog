@@ -9,3 +9,16 @@ a {
         }
     }
 }
+
+// 针对譬如'回复'这类的可以点击的对象
+a {
+    &.span{
+        color: @nice-grey;
+        font-size: 14px;
+        &:hover{
+            text-decoration: none;
+            color:@dark-grey;
+            margin-right: 10px;
+        }
+    }
+}

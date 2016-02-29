@@ -42,18 +42,6 @@ exports.updateArticleMeta = function(req, res, next){
   console.log("req body", req.body);
   var {metasToUpdate} = req.body;
 
-  // ArticleMeta.findOneAndUpdate({
-  //   articleId: articleId
-  // }, {$inc: metasToUpdate}, {new: true}, function(err, doc){
-  //   if (doc){
-  //     console.log("update meta : ", doc);
-  //     res.status(200).send(doc);
-  //   }else if(err){
-  //     console.log("update meta error : ", err);
-  //     res.status(500).send(err);
-  //   }
-  // })
-
   var $metaData = ArticleMeta.findOneAndUpdate({
     articleId: articleId
   }, {$inc: metasToUpdate}, {new: true});

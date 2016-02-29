@@ -10,6 +10,8 @@ import {
   createArticle, titleTyping, contentTyping
 } from '../actions/article'
 
+import {createArticleMeta} from '../actions/articleMeta'
+
 class AddArticle extends Component {
   constructor(props){
     super(props);
@@ -32,6 +34,7 @@ class AddArticle extends Component {
   onEntrySave(text){
     console.log("save entry from add article");
     const {dispatch} = this.props
+
     dispatch(createArticle());
   }
 

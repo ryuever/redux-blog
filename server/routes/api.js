@@ -4,6 +4,7 @@ var router = express.Router();
 var users = require('../controllers/user');
 var articles = require('../controllers/article');
 var comments = require('../controllers/comment');
+var articleMetas = require('../controllers/article-meta');
 
 // user authentication
 router.post('/login', users.postLogin);
@@ -16,4 +17,8 @@ router.get('/articles', articles.getArticles);
 
 router.post('/comment', comments.postComment);
 router.get('/comments/:articleId', comments.getComments);
+
+router.get('/articlemeta/:articleId', articleMetas.getArticleMeta);
+router.post('/articlemeta', articleMetas.createArticleMeta);
+router.put('/articlemeta/:articleId', articleMetas.updateArticleMeta);
 module.exports = router;

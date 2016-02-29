@@ -4,11 +4,13 @@ var db = require('../components/mongodb');
 
 var ArticleMetaSchema = new Schema({
   articleId: {type: Schema.Types.ObjectId, ref: 'Article'},
-  viewCount: Number,
-  upVote: Number,
-  downVote: Number
+  viewCount: {type: Number, default: 0},
+  upVote: {type: Number, default: 0},
+  downVote: {type: Number, default: 0}
 });
 
-ArticleSchema.virtual('createDate').get(function(){
+ArticleMetaSchema.virtual('createDate').get(function(){
   return this._id.getTimestamp();
 });
+
+module.exports = db.model('ArticleMeta', ArticleMetaSchema);

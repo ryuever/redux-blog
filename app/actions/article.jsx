@@ -3,6 +3,7 @@ import md5 from 'spark-md5'
 import _ from 'lodash'
 
 import * as types from '../constants'
+import {createArticleMeta} from './articleMeta'
 
 export function titleTyping(text){
   console.log("text in article title typing action : ", text)
@@ -20,7 +21,9 @@ export function contentTyping(text){
 }
 
 function createArticleRequest(article){
-  console.log("return from article action")
+  console.log("return from article action");
+  let articleId = article._id;
+
   return {
     type: types.CREATE_ARTICLE_REQUEST,
     article: article
@@ -54,6 +57,7 @@ export function createArticle(){
     })
      .done(function(article){
        console.log("post successful", article);
+       dispatch(createArticleMeta(article._id));
        dispatch(createArticleRequest(article))
      })
      .fail(function(jqXHR){
@@ -90,6 +94,7 @@ export function getArticles(){
 }
 
 export function getArticle(id){
+  console.log("get article : ")
   return (dispatch, getState) => {
     $.ajax({
       type: "GET",
@@ -97,6 +102,7 @@ export function getArticle(id){
     })
      .done(function(article){
        // var tmp = _.pick(article, ['_id', 'content', 'title']);
+       console.log("get article : ", article);
        return dispatch({
          type: types.GET_ARTICLE_REQUEST,
          presentArticle: article

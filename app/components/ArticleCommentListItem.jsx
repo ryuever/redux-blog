@@ -4,6 +4,9 @@ import classNames from 'classnames'
 
 import ArticleCommentListItemFooter from './ArticleCommentListItemFooter';
 import ArticleCommentReplyEntry from './ArticleCommentReplyEntry';
+import ArticleCommentListItemTop from './ArticleCommentListItemTop';
+
+import Avatar from "./Avatar"
 
 function compare(a,b) {
   if (a.full_slug < b.full_slug)
@@ -83,6 +86,7 @@ export default class ArticleCommentListItem extends Component{
       var child = '';
       var mm = [];
       var commentChild=[];
+      var commentBody = '';
       for (var key in dict) {
         var nested_child = '';
         if(Object.keys(dict[key]).length !== 0){
@@ -92,20 +96,37 @@ export default class ArticleCommentListItem extends Component{
           depth = depth - 1;
         }
 
+        var userAvatar = React.createElement(Avatar);
+
+
+        var commentTop = React.createElement(ArticleCommentListItemTop, {
+          creatorName: slug_to_data[key].creatorName,
+          createDate: slug_to_data[key].createDate
+        });
+
         var commentFooter = React.createElement(ArticleCommentListItemFooter,{
           handleClickReply:self.handleClickReply,
           slug: slug_to_data[key].slug
         });
 
-        commentChild = [slug_to_data[key].content ,commentFooter, nested_child]
+        commentBody = React.createElement('div', {
+          className: '_rb-comment-body'
+        }, commentTop, [slug_to_data[key].content, commentFooter])
+
 
         if(clickReply && slug === slug_to_data[key].slug){
           var cr = React.createElement(ArticleCommentReplyEntry, {
             handleReplySubmit: self.handleReplySubmit,
             handleReplyBlur: self.handleReplyBlur,
             slug: slug_to_data[key].slug});
-          commentChild = [slug_to_data[key].content ,commentFooter, cr, nested_child]
+
+          commentBody = React.createElement('div', {
+            className: '_rb-comment-body'
+          }, commentTop, [slug_to_data[key].content, commentFooter, cr])
+
         }
+
+        commentChild = [userAvatar, commentBody, nested_child]
 
         console.log("slug_to_data[key] : ", slug_to_data[key]);
 

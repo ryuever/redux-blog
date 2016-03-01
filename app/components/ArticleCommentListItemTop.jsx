@@ -1,19 +1,17 @@
 import React, {Component, PropTypes} from 'react';
 
-export default class ArticleCommentListItemTop extends Component {
+class ArticleCommentListItemTop extends Component {
 
   render(){
+    const {creatorName, createDate} = this.props;
 
     return(
-      <div className="_rb-comment-item-top">
-        <div className="avatar">
-        </div>
-        <div className="name">
-        </div>
-        <div className="rb-comment-time">
-        </div>
-      </Avatar>
+      <div className="_rb-comment-list-item-top">
+        <a role="button" className="">{creatorName}</a>
+        <span>{createDate}</span>
+      </div>
     )
   }
-
 }
+
+export default ArticleCommentListItemTop

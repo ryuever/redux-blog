@@ -1,0 +1,17 @@
+import React, {Component, PropTypes} from 'react';
+
+class Avatar extends Component{
+
+  render(){
+    return(
+      <div className="_rb-avatar">
+        <a >
+          <img src="http://localhost:5000/pp.jpg" alt="头像" />
+        </a>
+      </div>
+    )
+  }
+
+}
+
+export default Avatar

@@ -26,8 +26,9 @@ class Articles extends Component{
             return <ArticleListItem
             key={article._id}
             id={article._id}
-            articleTitle={article.title}
+            articleTags ={article.tags}
             articleCreateDate={article.createDate}
+            articleTitle={article.title}
             articleContent={article.content}/>})}
         </section>
         {this.props.children}

@@ -75,8 +75,10 @@ exports.postComment = function(req, res, next){
     // console.log('locale date', new Date(createDate).toLocaleString());
     return res.status(200).send(ret);
   }).catch(function(err){
-    console.log("save comment error : ", err);
-    res.status(500).send('save comment err');
+    if(err){
+      console.log("save comment error : ", err);
+      res.status(500).send('save comment err');
+    }
   });
 }
 
@@ -88,26 +90,29 @@ exports.getComments = function(req, res, next){
     articleId: articleId
   }).exec();
 
-  $comments.then(function(comments){
-    if(comments){
-      var tmp = comments.map(function(comment){
-        var ret = {
-          _id: comment._id,
-          creatorName: comment.creatorName,
-          content: comment.content,
-          articleId: comment.articleId,
-          avartar: comment.avartar,
-          createDate: comment.createDate.toLocaleString(),
-          slug: comment.slug,
-          full_slug: comment.full_slug
-        };
-        return ret;
-      });
-      res.status(200).send(tmp);
-    }
-  })
+  $comments
+    .then(function(comments){
+      if(comments){
+        var tmp = comments.map(function(comment){
+          var ret = {
+            _id: comment._id,
+            creatorName: comment.creatorName,
+            content: comment.content,
+            articleId: comment.articleId,
+            avartar: comment.avartar,
+            createDate: comment.createDate.toLocaleString(),
+            slug: comment.slug,
+            full_slug: comment.full_slug
+          };
+          return ret;
+        });
+        return res.status(200).send(tmp);
+      }
+    })
     .catch(function(err){
-      console.log('get comments error');
-      res.status(500).send('get comments error');
+      if (err){
+        console.log('get comments error');
+        res.status(500).send('get comments error');
+      }
     });
 }

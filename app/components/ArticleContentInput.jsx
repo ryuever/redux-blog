@@ -11,7 +11,6 @@ export default class RichEditor extends React.Component {
 
     this.focus = () => this.refs.editor.focus();
     this.onChange = (editorState) => {
-      console.log("running on change ", editorState);
       const {onContentChange} = this.props;
       this.setState({editorState});
       var contentState = editorState.getCurrentContent();
@@ -34,7 +33,6 @@ export default class RichEditor extends React.Component {
 
       // var markedUpBlocks = buildMarkup(rawDraftContentBlock, markup);
       var markedUpBlocks = buildMarkdown(rawDraftContentBlock, markup, blockTag);
-      console.log("markedUpBlocks : ", markedUpBlocks);
       onContentChange(markedUpBlocks);
     }
 
@@ -73,18 +71,18 @@ export default class RichEditor extends React.Component {
 
   render() {
     const {editorState} = this.state;
-
+    console.log('render rich editor .......')
     // If the user changes block type before entering any text, we can
     // either style the placeholder or hide it. Let's just hide it now.
     let className = 'RichEditor-editor';
     var contentState = editorState.getCurrentContent();
-    console.log('content state from editor :  contentState', contentState);
-    console.log("get plain text : ", contentState.getPlainText());
-    console.log("get block as arrary ", contentState.getBlocksAsArray());
-    console.log("get block as arrary ", contentState.getBlocksAsArray().map((contentBlock) => {
-      console.log("contentBlock style : ", contentBlock.getCharacterList(), contentBlock.getType())
-    }));
-    console.log('raw draft ', convertToRaw(contentState));
+    /* console.log('content state from editor :  contentState', contentState);
+       console.log("get plain text : ", contentState.getPlainText());
+       console.log("get block as arrary ", contentState.getBlocksAsArray());
+       console.log("get block as arrary ", contentState.getBlocksAsArray().map((contentBlock) => {
+       console.log("contentBlock style : ", contentBlock.getCharacterList(), contentBlock.getType())
+       }));
+       console.log('raw draft ', convertToRaw(contentState)); */
     if (!contentState.hasText()) {
       if (contentState.getBlockMap().first().getType() !== 'unstyled') {
         className += ' RichEditor-hidePlaceholder';

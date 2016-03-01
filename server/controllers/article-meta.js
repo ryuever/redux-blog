@@ -49,7 +49,7 @@ exports.updateArticleMeta = function(req, res, next){
   $metaData
     .then(function(metaData){
       if(metaData){
-        res.status(200).send(metaData);
+        return res.status(200).send(metaData);
       }
     })
     .catch(function(err){

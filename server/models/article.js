@@ -5,7 +5,8 @@ var db = require('../components/mongodb');
 var ArticleSchema = new Schema({
   creatorId: {type : Schema.Types.ObjectId, ref: 'User'},
   title: String,
-  content: String
+  content: String,
+  tags: [{type: Schema.Types.ObjectId, ref: "Tag"}]
 });
 
 ArticleSchema.virtual('createDate').get(function(){

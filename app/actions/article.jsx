@@ -4,6 +4,7 @@ import _ from 'lodash'
 
 import * as types from '../constants'
 import {createArticleMeta} from './articleMeta'
+import {clearNewArticleTags} from './tag'
 
 export function titleTyping(text){
   console.log("text in article title typing action : ", text)
@@ -32,22 +33,15 @@ function createArticleRequest(article){
 
 export function createArticle(){
   return (dispatch, getState) => {
-    console.log('newArticle : ', getState(), getState().article);
     const {newArticle} = getState().article;
-    console.log('newArticle', newArticle);
+    const tags = getState().tag.newArticleTag;
     const newTitle = '<h1>' + newArticle.articleTitle + '</h1>';
     const newContent = newArticle.articleContent;
 
-    /* const id = md5.hash(newTitle);
-       const data = {
-       id,
-       newTitle,
-       newContent
-       }; */
-
     const data = {
       newTitle,
-      newContent
+      newContent,
+      tags
     };
 
     $.ajax({
@@ -58,7 +52,9 @@ export function createArticle(){
      .done(function(article){
        console.log("post successful", article);
        dispatch(createArticleMeta(article._id));
-       dispatch(createArticleRequest(article))
+       dispatch(clearNewArticleTags());
+       dispatch(createArticleRequest(article));
+
      })
      .fail(function(jqXHR){
        console.log("post error");

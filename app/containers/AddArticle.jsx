@@ -6,9 +6,11 @@ import RichEditor from '../components/ArticleContentInput';
 import ArticleTitleInput from '../components/ArticleTitleInput';
 import ArticleSubmit from '../components/ArticleSubmit';
 
+import ArticleTag from './ArticleTag'
+
 import {
   createArticle, titleTyping, contentTyping
-} from '../actions/article'
+} from '../actions/article';
 
 import {createArticleMeta} from '../actions/articleMeta'
 
@@ -21,7 +23,6 @@ class AddArticle extends Component {
   }
 
   onTitleChange(text){
-    console.log("this props in AddArticle : ", this.props, text)
     const {dispatch} = this.props;
     dispatch(titleTyping(text));
   }
@@ -32,27 +33,26 @@ class AddArticle extends Component {
   }
 
   onEntrySave(text){
-    console.log("save entry from add article");
     const {dispatch} = this.props
-
     dispatch(createArticle());
   }
 
   render(){
-    console.log("this props in addarticle render  :  ", this.props)
+    console.log("render add article ---------");
+
     return(
       <div className="add-article-main col-xs-offset-1 col-xs-8">
         <div className="add-article-page-title">
           create a new article
         </div>
         <div className="article-scratch-body center">
-
           <div className="article-title">
             <ArticleTitleInput newTitle={this.props.articleTitle}
              onTitleChange={this.onTitleChange} />
           </div>
           <RichEditor
            onContentChange={this.onContentChange}/>
+          <ArticleTag />
           <ArticleSubmit
            onSubmit={this.onEntrySave}/>
         </div>
@@ -70,12 +70,11 @@ AddArticle.propTypes = {
 }
 
 function mapStateToProps(state){
-  console.log("mapping state to props from add article=================");
-  console.log('state : ', state)
-    return {
-      articleTitle: state.article.newArticle.articleTitle,
-      articleContent: state.article.newArticle.articleContent
-    }
+  console.log("map state to props in add article", state, state.tag.newArticleTag);
+  return {
+    articleTitle: state.article.newArticle.articleTitle,
+    articleContent: state.article.newArticle.articleContent
+  }
 }
 
 export default connect(mapStateToProps)(AddArticle)

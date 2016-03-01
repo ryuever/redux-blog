@@ -5,6 +5,7 @@ var users = require('../controllers/user');
 var articles = require('../controllers/article');
 var comments = require('../controllers/comment');
 var articleMetas = require('../controllers/article-meta');
+var tags = require('../controllers/tag');
 
 // user authentication
 router.post('/login', users.postLogin);
@@ -21,4 +22,6 @@ router.get('/comments/:articleId', comments.getComments);
 router.get('/articlemeta/:articleId', articleMetas.getArticleMeta);
 router.post('/articlemeta', articleMetas.createArticleMeta);
 router.put('/articlemeta/:articleId', articleMetas.updateArticleMeta);
+
+router.post('/tag', tags.createTag);
 module.exports = router;

@@ -19,9 +19,9 @@ exports.postLogin = function(req, res, next){
           };
           res.cookie('uid', user._id, cookieOptions);
           req.session.sessionId = user._id;
-          res.status(200).send('login successful');
+          return res.status(200).send('login successful');
         }else {
-          res.status(500).send('login error');
+          return res.status(500).send('login error');
         }
       })
     }
@@ -54,9 +54,10 @@ exports.postSignUp = function(req, res, next){
       Cookie.setCookie(req, res, 'uid', user._id);
       return res.status(200).send('sign up successful !');
     })
-
     .catch((err)=>{
-      console.log('signup error', err);
+      if (er){
+        console.log('signup error', err);
+      }
     });
 };
 

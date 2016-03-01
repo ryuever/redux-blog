@@ -13,14 +13,22 @@ const converter = new showdown.Converter();
 class Article extends Component {
   constructor(props){
     super(props);
+    const {dispatch} = this.props;
+    const id = this.props.params.id
+    dispatch(getArticle(id));
    }
+
+  /* getInitialState(){
+     const {dispatch} = this.props;
+     const id = this.props.params.id
+     dispatch(getArticle(id));
+     } */
 
   componentDidMount(){
     const {dispatch} = this.props;
     const id = this.props.params.id
 
     dispatch(updateArticleMeta(id, {viewCount: 1}));
-    dispatch(getArticle(id));
   }
 
   render(){

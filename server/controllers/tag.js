@@ -6,13 +6,6 @@ exports.createTag = function(req, res, next){
   var {name} = req.body;
   var _sessionId = req._sessionId;
 
-  // var tags = tagsShouldCreate.map(function(tagShouldCreate){
-  //   return ({
-  //     creatorId: _sessionId,
-  //     name: name
-  //   });
-  // });
-
   var $tag = new Tag({
     name: name,
     creatorId: _sessionId

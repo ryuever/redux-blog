@@ -6,27 +6,11 @@ export function tagAddition(tag){
   return (dispatch, getState)=>{
 
     var suggestions = getState().tag.suggestions;
-    var newArticleTags = getState().tag.newArticleTag;
-    var tagsShouldCreate = [];
-
-    /* var newArticleTagsArr = newArticleTags.map(function(newArticleTag){
-       return newArticleTag.text;
-       }); */
-
-    /* tagsShouldCreate = newArticleTagsArr.filter(function(newArticleTag){
-       for (var item in suggestions){
-       if(item['name'] === newArticleTag)
-       return false;
-       }
-       return true;
-       }); */
 
     for (var item in suggestions){
       if(item['name'] === tag)
         return false;
     }
-
-    console.log("tags should update : ", tagsShouldCreate);
 
     var data ={
       name: tag

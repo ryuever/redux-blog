@@ -32,18 +32,22 @@ class ArticleCommentReplyEntry extends Component{
   render(){
     return(
       <div className="_rb-comment-reply" >
-        <input
-         placeholder="Input your name"
-         ref="replyName"/>
-        <input
+        <textarea
          placeholder="Input your comment"
          ref="reply"/>
-        <button
-         className="_rb-comment-reply-btn _rb-btn"
-         onClick={this.onSubmit}
-         >
-          Submit
-        </button>
+        <div>
+          <input
+           placeholder="Input your name"
+           ref="replyName"/>
+        </div>
+        <div>
+          <button
+           className="_rb-comment-reply-btn _rb-btn"
+           onClick={this.onSubmit}
+           >
+            Submit
+          </button>
+        </div>
       </div>
     )
   }

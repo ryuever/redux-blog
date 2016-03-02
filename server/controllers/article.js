@@ -16,8 +16,6 @@ exports.postArticle = function(req, res, next){
   console.log('hhah');
   $checkTags
     .then(function(fetchTags){
-      console.log("check finish");
-      console.log('tags : ', fetchTags);
       var $newArticle = new Article({
         creatorId: _sessionId,
         title: newTitle,
@@ -28,7 +26,6 @@ exports.postArticle = function(req, res, next){
       return $newArticle.save();
     })
     .then(function(article){
-      console.log("article ", article);
       if(article){
 
         var ret = {
@@ -121,5 +118,4 @@ exports.getArticle = function(req, res, next){
         res.status(500).send('error');
       }
     });
-
 };

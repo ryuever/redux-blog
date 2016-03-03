@@ -15,7 +15,7 @@ class Articles extends Component{
   render(){
     const {articles} = this.props
     return(
-      <div className="_rb-articles-main col-xs-offset-1 col-xs-8">
+      <div className="_rb-articles-main">
 
         <div className="_rb-articles-page-title">
           title list

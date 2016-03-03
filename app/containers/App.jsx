@@ -1,19 +1,26 @@
 import React, {Component, PropTypes} from 'react';
-import Navigation from './Navigation'
+import Navigation from './Navigation';
+
+import AppHeader from './AppHeader';
 
 import classNames from 'classnames'
 
 export default class App extends Component {
   render() {
     return (
-      <section className="row">
-        <div className="col-xs-1">
+      <div className="_rb-app">
+        <div className="_rb-nav-bar">
           <Navigation />
         </div>
-        <div className="col-xs-10">
-          {this.props.children}
+        <div className="_rb-header">
+          <AppHeader />
         </div>
-      </section>
+        <div className="_rb-main">
+          <div className="_rb-content">
+          {this.props.children}
+          </div>
+        </div>
+      </div>
     );
   }
 }

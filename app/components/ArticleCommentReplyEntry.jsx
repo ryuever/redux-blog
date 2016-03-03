@@ -35,7 +35,7 @@ class ArticleCommentReplyEntry extends Component{
         <textarea
          placeholder="Input your comment"
          ref="reply"/>
-        <div>
+        <div >
           <input
            placeholder="Input your name"
            ref="replyName"/>

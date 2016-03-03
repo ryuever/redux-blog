@@ -54,7 +54,7 @@ ArticleTag.propTypes = {
 
 function mapStateToProps(state){
   return{
-    newTags: state.tag.newArticleTag,
+    newTags: state.tag.newArticleTag
   }
 }
 

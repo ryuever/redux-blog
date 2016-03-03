@@ -1,0 +1,125 @@
+._rb-nav-bar{
+    position: fixed;
+    width: 12%;
+    height: 100%;
+    background: @bootstrap-purple;
+    top: 0px;
+}
+
+._rb-header{
+    position: fixed;
+    height: 45px;
+    width: 88%;
+    left: 12%;
+    top: 0px;
+    background: white;
+    z-index: 1;
+    border-bottom: 1px solid #eee;
+
+
+    ._rb-actions{
+        float: right;
+        line-height: 45px;
+        margin-right: 20px;
+
+        ._rb-action-item {
+            display: inline-block;
+            height: 35px;
+            border: 1px solid #eee;
+            vertical-align: middle;
+            /* text-align: center; */
+            line-height: 35px;
+            border-radius: 3px;
+            margin-right: 5px;
+        }
+
+        ._rb-action {
+            margin-right: 10px;
+            margin-left: 10px;
+        }
+
+        input{
+            width: 200px;
+            height: 35px;
+            line-height: 45;
+            font-size: 20px;
+            verticle-align: middle;
+            border-radius: 3px;
+        }
+
+    }
+}
+
+._rb-main{
+    // position: fixed;
+    position: relative;
+    left: 12%;
+    width: 88%;
+    margin-top: 45px;
+
+    ._rb-content{
+        width: 70%;
+        margin-top: 10px;
+    }
+}
+
+._rb-user-container {
+    height: 40px;
+    width: 100%;
+    veticle-align: middle;
+    line-height: 40px;
+    span {
+        margin-left: 5px;
+    }
+
+    &:hover{
+        background: @dark-bootstrap-purple;
+    }
+}
+
+
+._rb-nav-bar-item{
+    width: 80%;
+    height: 20px;
+    line-height: 20px;
+    font-size: 14px;
+    text-decoration: none;
+
+    &:hover{
+        background: @dark-bootstrap-purple;
+        border-top-right-radius: .25rem;
+        border-bottom-right-radius: .25rem;
+        border-bottom-left-radius: 0;
+        border-top-left-radius: 0;
+    };
+
+    &.selected{
+        background: @nice-selected-color;
+        border-top-right-radius: .25rem;
+        border-bottom-right-radius: .25rem;
+        border-bottom-left-radius: 0;
+        border-top-left-radius: 0;
+    }
+}
+
+._rb-nav-list {
+  padding: 0;
+  list-style-type: none;
+  margin-top: 20px;
+
+  li a{
+      padding-left: 15px;
+      display: block;
+      width: 100%;
+
+      &:hover,
+      &:visited,
+      &:active{
+          text-decoration: none;
+      }
+
+      &:hover{
+          color: white;
+      }
+  }
+}

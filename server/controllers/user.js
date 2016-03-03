@@ -21,6 +21,7 @@ exports.postLogin = function(req, res, next){
           req.session.sessionId = user._id;
           return res.status(200).send('login successful');
         }else {
+          console.log('running not match');
           return res.status(500).send('login error');
         }
       })

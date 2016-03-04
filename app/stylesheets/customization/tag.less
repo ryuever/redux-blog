@@ -1,0 +1,84 @@
+// <div class="_rb-tags">
+//   <a href="#">tag1</a>
+//   <a href="#">tag2</a>
+//   <a href="#">tag3</a>
+// </div>
+
+._rb-tags a {
+  display: inline-block;
+  // height: 21px;
+  height: 14px;
+  margin: 0 10px 0 0;
+  padding: 0 7px 0 14px;
+  white-space: nowrap;
+  position: relative;
+
+  // #fed970 => #D5DCDF  #febc4a => #EDF0EF
+  background: -moz-linear-gradient(top, #D5DCDF 0%, #EDF0EF 100%);
+  background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#D5DCDF), color-stop(100%,#EDF0EF));
+  background: -webkit-linear-gradient(top, #D5DCDF 0%,#EDF0EF 100%);
+  background: -o-linear-gradient(top, #D5DCDF 0%,#EDF0EF 100%);
+  background: linear-gradient(to bottom, #D5DCDF 0%,#EDF0EF 100%);
+  background-color: #FEC95B;
+
+  //color: #963;
+  color: #000;
+  // font: bold 11px/21px Arial, Tahoma, sans-serif;
+  font-size: 8px;
+  text-decoration: none;
+  text-shadow: 0 1px rgba(255,255,255,0.4);
+
+  border-top: 1px solid #9A958C;
+  border-bottom: 1px solid #90897E;
+  border-right: 1px solid #746F66;
+  border-radius: 1px 3px 3px 1px;
+  // box-shadow: inset 0 1px #FEE395, 0 1px 2px rgba(0,0,0,0.21);
+
+  line-height: 12px;
+  text-align: center;
+}
+
+._rb-tags a:before {
+  content: '';
+  position: absolute;
+  // top: 5px;
+  top: 2.4px;
+  // left: -6px;
+  left: -4.5px;
+  // width: 10px;
+  // height: 10px;
+  width: 7px;
+  height: 7px;
+
+  // #fed970 => #D5DCDF  #febc4a => #EDF0EF
+  background: -moz-linear-gradient(45deg, #D5DCDF 0%, #EDF0EF 100%);
+  background: -webkit-gradient(linear, left bottom, right top, color-stop(0%,#D5DCDF), color-stop(100%,#EDF0EF));
+  background: -webkit-linear-gradient(-45deg, #D5DCDF 0%,#EDF0EF 100%);
+  background: -o-linear-gradient(45deg, #D5DCDF 0%,#EDF0EF 100%);
+  background: linear-gradient(135deg, #D5DCDF 0%,#EDF0EF 100%);
+  background-color: #FEC95B;
+
+  border-left: 1px solid #9C958A;
+  border-bottom: 1px solid #90897E;
+  border-radius: 0 0 0 2px;
+  // box-shadow: inset 1px 0 #FEDB7C, 0 2px 2px -2px rgba(0,0,0,0.33);
+
+  -webkit-transform: scale(1, 1.4) rotate(45deg);
+  -moz-transform: scale(1, 1.4) rotate(45deg);
+  -ms-transform: scale(1, 1.4) rotate(45deg);
+  transform: scale(1, 1.4) rotate(45deg);
+}
+
+._rb-tags a:after {
+  content: '';
+  position: absolute;
+  // top: 7px;
+  top: 4px;
+  left: 1px;
+  width: 5px;
+  height: 5px;
+  background: #FFF;
+  border-radius: 4px;
+  border: 1px solid #DCA03B;
+  box-shadow: 0 1px 0 rgba(255,255,255,0.2), inset 0 1px 1px rgba(0,0,0,0.21);
+}

@@ -7,11 +7,7 @@ class ArticleSubmit extends Component{
     console.log("render article submit")
     console.log("this props from Article submit", this.props);
     return(
-      <div>
-        <button
-         className="_rb-btn"
-         type="cancel"> Cancel </button>
-        <span>   </span>
+      <div className="_rb-post-article">
         <button
          type="submit"
          onClick={this.props.onSubmit}

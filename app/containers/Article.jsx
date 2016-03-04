@@ -34,19 +34,17 @@ class Article extends Component {
   render(){
     console.log("article render function -----------");
     return(
-      <div className="articles-main col-xs-offset-1 col-xs-8">
-        <section>
-          <div dangerouslySetInnerHTML={{__html: converter.makeHtml(this.props.presentTitle)}} />
-          <div className="_rb-article-meta">
-            <span>浏览{this.props.viewCount}</span>
-            <span>喜欢{this.props.upVote}</span>
-          </div>
-          <div dangerouslySetInnerHTML={{__html: converter.makeHtml(this.props.presentContent)}} />
-          <ArticleComment
-           articleId={this.props.params.id}
-          />
-        </section>
-      </div>
+      <section>
+        <div dangerouslySetInnerHTML={{__html: converter.makeHtml(this.props.presentTitle)}} />
+        <div className="_rb-article-meta">
+          <span>浏览{this.props.viewCount}</span>
+          <span>喜欢{this.props.upVote}</span>
+        </div>
+        <div dangerouslySetInnerHTML={{__html: converter.makeHtml(this.props.presentContent)}} />
+        <ArticleComment
+         articleId={this.props.params.id}
+        />
+      </section>
     )
   }
 }

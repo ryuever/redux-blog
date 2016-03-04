@@ -39,7 +39,7 @@
         }
 
         input{
-            width: 200px;
+            width: 250px;
             height: 35px;
             line-height: 45;
             font-size: 20px;
@@ -58,7 +58,7 @@
     margin-top: 45px;
 
     ._rb-content{
-        width: 70%;
+        width: 75%;
         margin-top: 10px;
     }
 }
@@ -103,23 +103,106 @@
 }
 
 ._rb-nav-list {
-  padding: 0;
-  list-style-type: none;
-  margin-top: 20px;
+    padding: 0;
+    list-style-type: none;
+    margin-top: 20px;
 
-  li a{
-      padding-left: 15px;
-      display: block;
-      width: 100%;
+    li a{
+        padding-left: 15px;
+        display: block;
+        width: 100%;
 
-      &:hover,
-      &:visited,
-      &:active{
-          text-decoration: none;
-      }
+        &:hover,
+        &:visited,
+        &:active{
+            text-decoration: none;
+        }
 
-      &:hover{
-          color: white;
-      }
-  }
+        &:hover{
+            color: white;
+        }
+    }
+}
+
+
+
+
+// Nav Footer
+._rb-system-action {
+    position: fixed;
+    bottom: 0px;
+    height: 30px;
+    width: 12%;
+    line-height: 30px;
+
+    span{
+        line-height: 30px;
+    }
+
+    span.glyphicon-list {
+        position: absolute;
+        left: 40%;
+        opacity: 1;
+
+        color: #ab9ba9;
+        opacity: 1;
+        -moz-opacity: 1;
+        -khtml-opacity: 1;
+        -webkit-transition: opacity .1s ease-out 0s,color .1s ease-out 0s,left .1s ease-in-out 0s;
+        -moz-transition: opacity .1s ease-out 0s,color .1s ease-out 0s,left .1s ease-in-out 0s;
+        transition: opacity .25s ease-out 0s,color .25s ease-out 0s,left .25s ease-in-out 0s;
+    }
+
+    &:hover span.glyphicon-list {
+        left: 10px;
+        opacity: 0;
+
+        -moz-opacity: 1;
+        -khtml-opacity: 1;
+        -webkit-transition: opacity .1s ease-out 0s,color .1s ease-out 0s,left .1s ease-in-out 0s;
+        -moz-transition: opacity .1s ease-out 0s,color .1s ease-out 0s,left .1s ease-in-out 0s;
+        transition: opacity .25s ease-out 0s,color .25s ease-out 0s,left .25s ease-in-out 0s;
+    }
+
+
+    &:hover span.authenticated {
+        color: #fff;
+        opacity: 1;
+        -moz-opacity: 1;
+        -khtml-opacity: 1;
+        -webkit-transition: all .25s cubic-bezier(.16,.85,.5,1) .25s;
+        -moz-transition: all .25s cubic-bezier(.16,.85,.5,1) .25s;
+        transition: all .25s cubic-bezier(.16,.85,.5,1) .25s;
+    }
+
+    span.authenticated {
+        color: #ab9ba9;
+        opacity: 0;
+        -moz-opacity: 0;
+        -khtml-opacity: 0;
+        -webkit-transition: all .1s cubic-bezier(.16,.85,.5,1) 0s;
+        -moz-transition: all .1s cubic-bezier(.16,.85,.5,1) 0s;
+        transition: all .1s cubic-bezier(.16,.85,.5,1) 0s;
+        position: relative;
+    }
+
+    span.glyphicon-cog {
+        opacity: 0;
+        -moz-opacity: 0;
+        -khtml-opacity: 0;
+        -webkit-transition: all .1s cubic-bezier(.16,.85,.5,1) 0s;
+        -moz-transition: all .1s cubic-bezier(.16,.85,.5,1) 0s;
+        transition: all .1s cubic-bezier(.16,.85,.5,1) 0s;
+        position: absolute;
+        right: 1rem;
+    }
+
+    &:hover span.glyphicon-cog {
+        opacity: 1;
+        -moz-opacity: 1;
+        -khtml-opacity: 1;
+        -webkit-transition: all .25s cubic-bezier(.16,.85,.5,1) .35s;
+        -moz-transition: all .25s cubic-bezier(.16,.85,.5,1) .35s;
+        transition: all .25s cubic-bezier(.16,.85,.5,1) .35s;
+    }
 }

@@ -3,7 +3,8 @@ import {Link} from 'react-router'
 import {connect} from 'react-redux'
 import classNames from 'classnames'
 
-import Avatar from '../components/Avatar'
+import Avatar from '../components/Avatar';
+import NavFooter from './NavFooter';
 
 var RenderUser = React.createClass({
   render: function(){
@@ -13,7 +14,7 @@ var RenderUser = React.createClass({
 
     console.log("user and authenticated ", authenticated, user);
     if (authenticated){
-      user = '刘友超';
+      user = '刘君';
     }else{
       user = 'Guest';
     }
@@ -86,8 +87,8 @@ class Navigation extends Component {
 
   render(){
     const nav_item = [
-      {toLink: 'login', value: '登陆'},
-      {toLink: 'logout', value: '登出'},
+      /* {toLink: 'login', value: '登陆'},
+         {toLink: 'logout', value: '登出'}, */
       {toLink: 'articles', value: '所有文章'},
       {toLink: 'article/add', value: '提交文章'}
     ]
@@ -112,6 +113,9 @@ class Navigation extends Component {
             )
            })}
         </ul>
+        <NavFooter
+         authenticated={this.props.authenticated}
+        />
       </div>
     )
   }

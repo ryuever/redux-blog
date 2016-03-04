@@ -14,6 +14,7 @@ import Logout from './containers/Logout';
 import ArticleList from './containers/Articles';
 import Article from './containers/Article';
 import AddArticle from './containers/AddArticle';
+import ArticleLayout from './containers/ArticleLayout';
 
 export default (
   <Route path="/">
@@ -28,7 +29,7 @@ export default (
       <Route path="articles">
         <IndexRoute component={ArticleList} />
       </Route>
-      <Route path="article">
+      <Route path="article" component={ArticleLayout}>
         <Route path="add" component={AddArticle} />
         <Route path=":id" component={Article} />
       </Route>

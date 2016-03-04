@@ -16,11 +16,11 @@ class ArticleListItem extends Component {
       <div className="_rb-article-list-item" >
         <div><h2><Link to={"/article/"+this.props.id}
                   className="_rb-article-item-title" >{displayTitle}</Link></h2></div>
-        <ul className="_rb-article-tag-list">
+        <div className="_rb-tags">
           {this.props.articleTags.map(function(tag){
-            return (<li key={tag._id}>{tag.name}</li>)
+            return (<a key={tag._id}>{tag.name}</a>)
            })}
-        </ul>
+        </div>
         <div className="_rb-article-list-item-content _rb-article-excerpt">{displayContent}</div>
         <div className="_rb-article-list-item-meta">
           <ArticleListItemMeta

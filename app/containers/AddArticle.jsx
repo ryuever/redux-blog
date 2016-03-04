@@ -41,20 +41,17 @@ class AddArticle extends Component {
     console.log("render add article ---------");
 
     return(
-      <div className="add-article-main col-xs-offset-1 col-xs-8">
-        <div className="add-article-page-title">
-          create a new article
+      <div className="_rb-add-article">
+        <div className="article-title">
+          <ArticleTitleInput newTitle={this.props.articleTitle}
+           onTitleChange={this.onTitleChange} />
         </div>
-        <div className="article-scratch-body center">
-          <div className="article-title">
-            <ArticleTitleInput newTitle={this.props.articleTitle}
-             onTitleChange={this.onTitleChange} />
-          </div>
-          <RichEditor
-           onContentChange={this.onContentChange}/>
+        <RichEditor
+         onContentChange={this.onContentChange}/>
+        <ArticleSubmit
+         onSubmit={this.onEntrySave}/>
+        <div className="_rb-add-article-tags">
           <ArticleTag />
-          <ArticleSubmit
-           onSubmit={this.onEntrySave}/>
         </div>
       </div>
     )

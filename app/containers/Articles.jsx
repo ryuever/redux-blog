@@ -17,10 +17,6 @@ class Articles extends Component{
     return(
       <div className="_rb-articles-main">
 
-        <div className="_rb-articles-page-title">
-          title list
-        </div>
-
         <section className="_rb-article-list">
           {articles.map(function(article){
             return <ArticleListItem

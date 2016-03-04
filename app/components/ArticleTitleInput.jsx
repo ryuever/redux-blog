@@ -14,11 +14,9 @@ class ArticleTitleInput extends Component{
   }
 
   render(){
-    console.log("this.props.newTitle : ");
-    console.log("this.props.newTitle : ", this.props)
     return(
       <input
-       className="article-form-input"
+       className="_rb-article-title-input"
        type="text"
        value={this.props.newTitle}
        onChange={this.onTitleChange}

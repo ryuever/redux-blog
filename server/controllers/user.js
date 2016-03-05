@@ -19,7 +19,7 @@ exports.postLogin = function(req, res, next){
           };
           res.cookie('uid', user._id, cookieOptions);
           req.session.sessionId = user._id;
-          return res.status(200).send('login successful');
+          return res.status(200).send(user);
         }else {
           console.log('running not match');
           return res.status(500).send('login error');
@@ -28,6 +28,30 @@ exports.postLogin = function(req, res, next){
     }
   })
 };
+
+exports.postAutoLogin = function(req, res, next){
+
+  if(req.cookies.uid){
+    console.log("req cookies uid : ", req.cookies.uid);
+
+    let $user = User.findOne({_id: req.cookies.uid}).exec();
+    $user
+      .then(function(user){
+        if (user){
+          req.session.sessionId = req.cookies.uid;
+          return res.status(200).send(user);
+        }
+      })
+      .catch(function(err){
+        if(err){
+          console.log("err : ", err);
+        }
+      })
+  }else{
+    return res.status(200).send('{}');
+  }
+}
+
 
 exports.postSignUp = function(req, res, next){
   let {email, password} = req.body.data;
@@ -53,15 +77,16 @@ exports.postSignUp = function(req, res, next){
     .then(function(user){
       console.log('save successful !', user);
       Cookie.setCookie(req, res, 'uid', user._id);
-      return res.status(200).send('sign up successful !');
+      return res.status(200).send(user);
     })
     .catch((err)=>{
-      if (er){
+      if (err){
         console.log('signup error', err);
       }
     });
 };
 
 exports.getLogout = function(req, res, next){
-  res.status(200).send('logout successful !');
+  res.clearCookie('uid');
+  req.session.destroy(function(e){ res.status(200).send('ok'); });
 };

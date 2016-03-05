@@ -23,10 +23,10 @@ module.exports = function(app){
       // req.set('_sessionId', req.session.sessionId);
       req._sessionId = req.session.sessionId;
       console.log("req._sessionId : ", req._sessionId);
-    } else if(req.cookies.uid){
-      req._sessionId = req.cookies.uid;
-      console.log('req sessionid from cookie', req._sessionId);
-    }
+    } // else if(req.cookies.uid){
+    //   req._sessionId = req.cookies.uid;
+    //   console.log('req sessionid from cookie', req._sessionId);
+    // }
 
     next();
   });

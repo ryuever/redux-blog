@@ -6,7 +6,7 @@ import RichEditor from '../components/ArticleContentInput';
 import ArticleTitleInput from '../components/ArticleTitleInput';
 import ArticleSubmit from '../components/ArticleSubmit';
 
-import ArticleTag from './ArticleTag'
+import ArticleTagContainer from './ArticleTagContainer'
 
 import {
   createArticle, titleTyping, contentTyping
@@ -50,9 +50,7 @@ class AddArticle extends Component {
          onContentChange={this.onContentChange}/>
         <ArticleSubmit
          onSubmit={this.onEntrySave}/>
-        <div className="_rb-add-article-tags">
-          <ArticleTag />
-        </div>
+        <ArticleTagContainer />
       </div>
     )
   }

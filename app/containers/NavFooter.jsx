@@ -1,8 +1,20 @@
 import React, {Component, PropTypes} from 'react';
 import classNames from 'classnames';
 import {Link} from "react-router";
+import { browserHistory } from 'react-router'
 
 class NavFooter extends Component{
+
+  constructor(props){
+    super(props);
+    this.onLogoutClick = this.onLogoutClick.bind(this);
+  }
+
+  onLogoutClick(){
+    const {handleLogout} = this.props;
+    console.log("handle log out : ", handleLogout);
+    handleLogout();
+  }
 
   RenderAuth(){
     const {authenticated} = this.props;
@@ -14,20 +26,26 @@ class NavFooter extends Component{
       'authenticated': true
     });
 
+    var toLink = authenticated ? '/logout' : '/login'
+
     if (authenticated){
+
       return(
-        <Link to="/logout">
-        <span className={classname}></span>
-        </Link>
+        <span
+         className={classname}
+         onClick={this.onLogoutClick}
+         >
+        </span>
       )
     }else{
       return(
         <Link to="/login">
-        <span className={classname}>
-        </span>
+        <span className={classname} />
         </Link>
       )
     }
+
+
   }
 
   render(){

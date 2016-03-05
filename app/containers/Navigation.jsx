@@ -6,23 +6,26 @@ import classNames from 'classnames'
 import Avatar from '../components/Avatar';
 import NavFooter from './NavFooter';
 
+import {logout} from '../actions/user';
+
 var RenderUser = React.createClass({
   render: function(){
     console.log('render user');
-    const {authenticated} = this.props;
-    var user = '';
+    const {authenticated, account} = this.props;
+    console.log("account : ", account);
+    var userName = '';
 
-    console.log("user and authenticated ", authenticated, user);
+    console.log("user and authenticated ", authenticated, account);
     if (authenticated){
-      user = '刘君';
+      userName = account.email;
     }else{
-      user = 'Guest';
+      userName = 'Guest';
     }
 
     return(
       <div className="_rb-user-container">
         <Avatar />
-        <span>{user}</span>
+        <span>{userName}</span>
         <span className="caret"></span>
       </div>
     )
@@ -73,7 +76,7 @@ class Navigation extends Component {
   constructor(props){
     super(props);
     this.handleClick = this.handleClick.bind(this);
-
+    this.handleLogout = this.handleLogout.bind(this);
     this.state = {
       selected: -1
     }
@@ -85,10 +88,14 @@ class Navigation extends Component {
     })
   }
 
+
+  handleLogout(){
+    console.log("handle logout --------------");
+    const {dispatch} = this.props;
+    dispatch(logout());
+  }
   render(){
     const nav_item = [
-      /* {toLink: 'login', value: '登陆'},
-         {toLink: 'logout', value: '登出'}, */
       {toLink: 'articles', value: '所有文章'},
       {toLink: 'article/add', value: '提交文章'}
     ]
@@ -98,7 +105,10 @@ class Navigation extends Component {
 
     return (
       <div>
-        <RenderUser authenticated={this.props.authenticated} />
+        <RenderUser
+         authenticated={this.props.authenticated}
+         account={this.props.account}
+        />
         <ul className='_rb-nav-list'>
           {nav_item.map(function(item, i){
             return(
@@ -115,6 +125,7 @@ class Navigation extends Component {
         </ul>
         <NavFooter
          authenticated={this.props.authenticated}
+         handleLogout={this.handleLogout}
         />
       </div>
     )
@@ -123,12 +134,14 @@ class Navigation extends Component {
 
 Navigation.propTypes ={
   dispatch: PropTypes.func.isRequired,
-  authenticated: PropTypes.bool.isRequired
+  authenticated: PropTypes.bool.isRequired,
+  account: PropTypes.object.isRequired
 }
 
 function mapStateToProps(state){
   return{
-    authenticated: state.user.authenticated
+    authenticated: state.user.authenticated,
+    account: state.user.account
   }
 }
 

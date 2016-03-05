@@ -65,6 +65,7 @@ exports.getArticles = function(req, res, next){
 
           return $populateTags
             .then(function(tags){
+              console.log("popuate tags : ", tags);
               var ret = {
                 _id: article._id,
                 title: article.title,
@@ -76,10 +77,11 @@ exports.getArticles = function(req, res, next){
             });
         });
       }})
-    .then(function(articles){
-      console.log('return articles on server : ', articles);
-      if(articles)
-        return res.status(200).send(articles);
+    .then(function(ret){
+      console.log("begin to return from article");
+      console.log("return tags ", ret.tags);
+      if(ret)
+        return res.status(200).send(ret);
     })
     .catch(function(err){
       if(err){

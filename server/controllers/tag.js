@@ -49,3 +49,26 @@ exports.createTag = function(req, res, next){
 //       }
 //     });
 // };
+
+
+
+exports.getTags = function(req, res, next){
+  var _sessionId = req._sessionId;
+
+  var $tags = Tag.find({
+    creatorId: _sessionId
+  }).exec();
+
+  $tags
+    .then(function(tags){
+      if(tags){
+        res.status(200).send(tags);
+      }
+    })
+    .catch(function(err){
+      if(err){
+        console.log('get articles error : ', err);
+        res.status(500).send('error');
+      }
+    });
+};

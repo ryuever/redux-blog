@@ -11,7 +11,6 @@ class ArticleListItem extends Component {
 
     var displayTitle = sanitizeHtml(this.props.articleTitle, {allowedTags: []});
     var displayContent = sanitizeHtml(this.props.articleContent, {allowedTags: []});
-
     return(
       <div className="_rb-article-list-item" >
         <div><h2><Link to={"/article/"+this.props.id}

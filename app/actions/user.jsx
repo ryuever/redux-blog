@@ -3,6 +3,8 @@ import 'es6-promise';
 // import fetch from 'isomorphic-fetch';
 
 import * as types from '../constants';
+import { browserHistory } from 'react-router'
+
 
 // Note this can be extracted out later
 /*
@@ -31,8 +33,11 @@ function beginLogin() {
   return { type: types.MANUAL_LOGIN_USER };
 }
 
-function loginSuccess() {
-  return { type: types.LOGIN_SUCCESS_USER };
+function loginSuccess(account) {
+  return {
+    type: types.LOGIN_SUCCESS_USER,
+    account: account
+  };
 }
 
 function loginError() {
@@ -49,8 +54,11 @@ function beginSignUp() {
   return { type: types.SIGNUP_USER };
 }
 
-function signUpSuccess() {
-  return { type: types.SIGNUP_SUCCESS_USER };
+function signUpSuccess(account) {
+  return {
+    type: types.SIGNUP_SUCCESS_USER,
+    account: account
+  };
 }
 
 // Log Out Action Creators
@@ -76,8 +84,8 @@ export function manualLogin(data) {
       url: '/api/login',
       data: {data: data}
     })
-     .done(() => {
-       return dispatch(loginSuccess());
+     .done((account) => {
+       return dispatch(loginSuccess(account));
      })
      .fail((jqXHR) => {
        return dispatch(loginError())
@@ -94,8 +102,8 @@ export function signUp(data) {
       url: "/api/signup",
       data: {data: data}
     })
-     .done(()=>{
-       return dispatch(signUpSuccess());
+     .done((account)=>{
+       return dispatch(signUpSuccess(account));
      })
      .fail(()=>{
        return dispatch(signUpError());
@@ -103,24 +111,18 @@ export function signUp(data) {
   };
 }
 
-export function logOut() {
-  return dispatch => {
-    dispatch(beginLogout());
-
-    return fetch('/logout', {
-      method: 'get',
-      credentials: 'same-origin',
-      headers: {
-          'Accept': 'application/json',
-          'Content-Type': 'application/json'
-      }
+export function logout(){
+  return (dispatch, getState) => {
+    $.ajax({
+      type: "GET",
+      url: '/api/logout'
     })
-      .then( response => {
-        if (response.status === 200) {
-          dispatch(logoutSuccess());
-        } else {
-          dispatch(logoutError());
-        }
-      });
-  };
+     .done(function(){
+       dispatch(logoutSuccess());
+       browserHistory.push('/login')
+     })
+     .fail(function(){
+       dispatch(logoutError());
+     })
+  }
 }

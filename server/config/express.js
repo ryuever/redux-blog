@@ -30,8 +30,8 @@ module.exports = function(app){
 
   app.use(session(sess));
 
-  app.use(function(req, res, next){
-    console.log('req.cookies.uid : ', req.cookies);
-    next();
-  })
+  // app.use(function(req, res, next){
+  //   console.log('req.cookies.uid : ', req.cookies);
+  //   next();
+  // })
 };

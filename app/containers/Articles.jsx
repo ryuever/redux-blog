@@ -12,8 +12,14 @@ class Articles extends Component{
     dispatch(getArticles());
   }
 
+  componentWillReceiveProps(){
+
+
+  }
+
   render(){
     const {articles} = this.props
+    console.log("articles tags : ", articles, articles.tags);
     return(
       <div className="_rb-articles-main">
 

@@ -11,6 +11,7 @@ var tags = require('../controllers/tag');
 router.post('/login', users.postLogin);
 router.post('/signup', users.postSignUp);
 router.get('/logout', users.getLogout);
+router.post('/autologin', users.postAutoLogin);
 
 router.get('/article/:id', articles.getArticle);
 router.post('/article', articles.postArticle);
@@ -24,4 +25,5 @@ router.post('/articlemeta', articleMetas.createArticleMeta);
 router.put('/articlemeta/:articleId', articleMetas.updateArticleMeta);
 
 router.post('/tag', tags.createTag);
+router.get('/tags', tags.getTags);
 module.exports = router;

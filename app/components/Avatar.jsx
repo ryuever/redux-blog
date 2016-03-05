@@ -6,7 +6,7 @@ class Avatar extends Component{
     return(
       <div className="_rb-avatar">
         <a >
-          <img src="http://localhost:5000/pp.jpg" alt="头像" />
+          <img src="/pp.jpg" alt="头像" />
         </a>
       </div>
     )

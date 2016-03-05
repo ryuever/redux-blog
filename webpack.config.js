@@ -52,23 +52,23 @@ var config = {
         // test: /\.jsx?$/,
         test: /\.js$|\.jsx$/,
         loader: 'babel',
-        // include: path.join(__dirname, 'app')
-        include: path.join(__dirname, 'app'),
-        query: {
-          "presets": ["react", "es2015"],
-          plugins: [
-            ["react-transform", {
-              transforms: [{
-                transform: "react-transform-hmr",
-                imports: ["react"],
-                locals: ["module"]
-              }, {
-                "transform": "react-transform-catch-errors",
-                "imports": ["react", "redbox-react"]
-              }]
-            }]
-          ]
-        }
+        include: path.join(__dirname, 'app')
+        // include: path.join(__dirname, 'app'),
+        // query: {
+        //   "presets": ["react", "es2015"],
+        //   plugins: [
+        //     ["react-transform", {
+        //       transforms: [{
+        //         transform: "react-transform-hmr",
+        //         imports: ["react"],
+        //         locals: ["module"]
+        //       }, {
+        //         "transform": "react-transform-catch-errors",
+        //         "imports": ["react", "redbox-react"]
+        //       }]
+        //     }]
+        //   ]
+        // }
       },{
         test: /\.less$/,
         loader: ExtractTextPlugin.extract("style-loader", "css-loader!less-loader")

@@ -6,6 +6,7 @@ exports.postArticle = function(req, res, next){
   console.log('call article post api');
   var {newTitle, newContent, tags} = req.body;
   var _sessionId = req._sessionId;
+  tags = tags || [];
   console.log("tags : ", tags);
 
   var $checkTags = Promise.map(tags, function(tag){

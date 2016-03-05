@@ -5,6 +5,7 @@ import _ from 'lodash'
 import * as types from '../constants'
 import {createArticleMeta} from './articleMeta'
 import {clearNewArticleTags} from './tag'
+import { browserHistory } from 'react-router'
 
 export function titleTyping(text){
   console.log("text in article title typing action : ", text)
@@ -54,7 +55,7 @@ export function createArticle(){
        dispatch(createArticleMeta(article._id));
        dispatch(clearNewArticleTags());
        dispatch(createArticleRequest(article));
-
+       browserHistory.push('/articles')
      })
      .fail(function(jqXHR){
        console.log("post error");

@@ -26,7 +26,11 @@ export default function article (state = {
 
     case CREATE_ARTICLE_REQUEST:
       articles = [...state.articles, action.article];
-      return Object.assign({}, state, {articles: articles})
+      newArticle = {
+        articleTitle: '',
+        articleContent: ''
+      }
+      return Object.assign({}, state, {articles: articles, newArticle: newArticle})
 
     case TITLE_TYPING:
       oldArticle = state.newArticle;

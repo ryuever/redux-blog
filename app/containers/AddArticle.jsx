@@ -8,6 +8,8 @@ import ArticleSubmit from '../components/ArticleSubmit';
 
 import ArticleTagContainer from './ArticleTagContainer'
 
+import { browserHistory } from 'react-router'
+
 import {
   createArticle, titleTyping, contentTyping
 } from '../actions/article';
@@ -20,6 +22,10 @@ class AddArticle extends Component {
     this.onTitleChange = this.onTitleChange.bind(this);
     this.onContentChange = this.onContentChange.bind(this);
     this.onEntrySave = this.onEntrySave.bind(this);
+
+    const {authenticated} = this.props
+    if (!authenticated)
+       browserHistory.push('/login')
   }
 
   onTitleChange(text){
@@ -61,6 +67,7 @@ AddArticle.propTypes = {
      articleContent: PropTypes.string.isRequired, */
   articleTitle: PropTypes.string,
   articleContent: PropTypes.string,
+  authenticated: PropTypes.bool.isRequired,
   dispatch: PropTypes.func.isRequired
 }
 
@@ -68,7 +75,9 @@ function mapStateToProps(state){
   console.log("map state to props in add article", state, state.tag.newArticleTag);
   return {
     articleTitle: state.article.newArticle.articleTitle,
-    articleContent: state.article.newArticle.articleContent
+    articleContent: state.article.newArticle.articleContent,
+    authenticated: state.user.authenticated
+
   }
 }
 

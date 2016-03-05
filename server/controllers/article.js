@@ -47,9 +47,9 @@ exports.postArticle = function(req, res, next){
 }
 
 exports.getArticles = function(req, res, next){
-  console.log("get article") ;
-  var _sessionId = req._sessionId;
 
+  var _sessionId = req._sessionId;
+  console.log("get article", _sessionId) ;
   var $articles = Article.find({
     creatorId: _sessionId
   }).exec();

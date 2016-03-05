@@ -22,6 +22,14 @@ class Signup extends Component {
   }
 
   render(){
+
+    const {authenticated} = this.props.user;
+    if (authenticated){
+      return (
+        <h1> Signup successful</h1>
+      )
+    }
+
     return(
       <fieldset>
         <input className="_rb-form-input center"
@@ -43,4 +51,10 @@ Signup.propTypes = {
   dispatch: PropTypes.func
 }
 
-export default connect()(Signup);
+function mapStateToProps(state){
+  return {
+    user: state.user
+  }
+}
+
+export default connect(mapStateToProps)(Signup)

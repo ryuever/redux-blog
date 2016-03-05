@@ -34,13 +34,13 @@ class NavFooter extends Component{
         <span
          className={classname}
          onClick={this.onLogoutClick}
-         >
+         >登出
         </span>
       )
     }else{
       return(
         <Link to="/login">
-        <span className={classname} />
+        <span className={classname}>登录</span>
         </Link>
       )
     }

@@ -48,6 +48,7 @@ exports.postAutoLogin = function(req, res, next){
         }
       })
   }else{
+    console.log('auto login fail');
     return res.status(200).send('{}');
   }
 }
@@ -87,6 +88,10 @@ exports.postSignUp = function(req, res, next){
 };
 
 exports.getLogout = function(req, res, next){
-  res.clearCookie('uid');
+  var cookieOptions = {
+    domain: config.cookiesDomain,
+    path: '/'
+  };
+  res.clearCookie('uid', cookieOptions);
   req.session.destroy(function(e){ res.status(200).send('ok'); });
 };

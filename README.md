@@ -22,12 +22,13 @@
 ### Testing
 * [mocha](https://github.com/mochajs/mocha)
 * [should.js](https://github.com/shouldjs/should.js)
+* [supertest](https://github.com/visionmedia/supertest)
 
 ### Bunding
 * [webpack](https://github.com/webpack/webpack)
 
 # Functionality
-* `Done` : Account sign up / sign in.
+* `Done`: Account sign up / sign in.
 * `Done`: Provide rich editor for posting article.
 * `Done`: Add tag for article.
 * `Done`: Threaded commenting.

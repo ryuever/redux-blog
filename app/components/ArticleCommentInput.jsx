@@ -11,14 +11,12 @@ export default class ArticleCommentInput extends Component {
     const {onCommentSubmit} = this.props;
     const content = ReactDOM.findDOMNode(this.refs.comment).value;
     const creatorName = ReactDOM.findDOMNode(this.refs.creatorName).value;
-    console.log('comment content : ', content);
     onCommentSubmit(content, creatorName);
     ReactDOM.findDOMNode(this.refs.comment).value = '';
     ReactDOM.findDOMNode(this.refs.creatorName).value = '';
   }
 
   render(){
-    console.log("render comment")
       return(
         <fieldset className="_rb-comment-input-entry">
           <input className="_rb-form-input"

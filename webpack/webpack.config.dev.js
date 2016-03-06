@@ -4,7 +4,7 @@ var ExtractTextPlugin = require("extract-text-webpack-plugin");
 var jquery = require('jquery');
 
 var hotMiddlewareScript = 'webpack-hot-middleware/client?path=/__webpack_hmr&timeout=20000&reload=true';
-var assetsPath = path.join(__dirname, 'public', 'assets');
+var assetsPath = path.join(__dirname, '..', 'public', 'assets');
 
 var config = {
   // addVendor: function (name, path) {
@@ -12,10 +12,11 @@ var config = {
   //   this.module.noParse.push(new RegExp('^' + name + '$'));
   // },
   // devtool: 'cheap-module-eval-source-map',
-  devtool: "source-map",
-  context: path.join(__dirname, 'app'),
+  // devtool: "source-map",
+  context: path.join(__dirname, '../app'),
   entry:{
-    app: ['./client', hotMiddlewareScript],
+    // app: ['./client', hotMiddlewareScript],
+    app: './client',
     vendor: './vendor',
     style: './stylesheets/_rb-main'
   },
@@ -52,7 +53,7 @@ var config = {
         // test: /\.jsx?$/,
         test: /\.js$|\.jsx$/,
         loader: 'babel',
-        include: path.join(__dirname, 'app')
+        include: path.join(__dirname,'..', 'app')
         // include: path.join(__dirname, 'app'),
         // query: {
         //   "presets": ["react", "es2015"],

@@ -12,7 +12,6 @@ class NavFooter extends Component{
 
   onLogoutClick(){
     const {handleLogout} = this.props;
-    console.log("handle log out : ", handleLogout);
     handleLogout();
   }
 

@@ -4,8 +4,6 @@ import React, {Component, PropTypes} from 'react'
 class ArticleSubmit extends Component{
 
   render(){
-    console.log("render article submit")
-    console.log("this props from Article submit", this.props);
     return(
       <div className="_rb-post-article">
         <button

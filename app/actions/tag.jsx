@@ -1,7 +1,6 @@
 import * as types from '../constants';
 
 export function tagAddition(tag){
-  console.log("tag addition in action : ", tag);
 
   return (dispatch, getState)=>{
 
@@ -22,14 +21,12 @@ export function tagAddition(tag){
       data: data
     })
      .done(function(tag){
-       console.log('suggestions from server : ', tag);
        dispatch({
          type: types.CREATE_ARTICLE_TAG_REQUEST,
          tag: tag
        })
      })
      .fail(function(jqXHR){
-       console.log('error from server on create tags');
        dispatch({
          type: types.CREATE_ARTICLE_TAG_FAILURE
        })

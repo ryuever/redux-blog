@@ -17,25 +17,21 @@ class ArticleTag extends Component{
   }
 
   handleTagDelete(i){
-    console.log('delete tag : ', i);
     const {dispatch} = this.props;
     dispatch(tagDelete(i));
   }
 
   handleTagAddition(tag){
-    console.log('add tag : ', tag);
     const {dispatch} = this.props;
     dispatch(tagAddition(tag));
   }
 
   handleTagDrag(tag, currPos, newPos){
-    console.log("drag tag : ", tag, currPos, newPos);
     const {dispatch} = this.props;
     dispatch(tagDrag(tag, currPos, newPos));
   }
 
   render(){
-    console.log('render article tag');
     var tags = this.props.newTags;
     return(
       <ReactTags

@@ -10,12 +10,9 @@ import {logout} from '../actions/user';
 
 var RenderUser = React.createClass({
   render: function(){
-    console.log('render user');
     const {authenticated, account} = this.props;
-    console.log("account : ", account);
     var userName = '';
 
-    console.log("user and authenticated ", authenticated, account);
     if (authenticated){
       userName = account.email;
     }else{
@@ -40,8 +37,6 @@ var RenderNavItem = React.createClass({
      }, */
 
   onItemClick: function(){
-    console.log("on click item");
-    console.log('on click item : ', this.props);
     const {handleClick, id} = this.props;
     handleClick(id);
   },
@@ -53,7 +48,6 @@ var RenderNavItem = React.createClass({
       "_rb-nav-bar-item": true
     })
 
-    console.log("selected classname : ", classname);
     return(
       <li
        className={classname}
@@ -90,7 +84,6 @@ class Navigation extends Component {
 
 
   handleLogout(){
-    console.log("handle logout --------------");
     const {dispatch} = this.props;
     dispatch(logout());
   }

@@ -13,7 +13,6 @@ class ArticleComment extends Component {
 
   onCommentSubmit(text, creatorName){
     const {dispatch, articleId} = this.props
-    console.log("onCommentSubmit text : ", text, articleId);
     dispatch(createComment(text, articleId, creatorName));
   }
 

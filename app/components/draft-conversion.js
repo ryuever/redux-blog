@@ -64,34 +64,22 @@ function buildMarkdown(rawJSData, innerHTMLTags, blockHTMLTags){
       });
     });
 
-    console.log("style ranges position before sort : ", styleRangesPosition);
-
     var sortByLeftTag = styleRangesPosition.sort(compare);
-    console.log('after sort left : ', sortByLeftTag);
     var tmp = {};
 
     sortByLeftTag.map(function(leftTag){
       var position = leftTag.startPosition.toString();
-      console.log('postion :', position);
       tmp[position] = tmp[position] ? tmp[position] : {};
-      console.log("tmp : ", tmp);
       tmp[position].left = tmp[position].left ? tmp[position].left : [];
-      console.log("inner ", leftTag.style);
       tmp[position].left.push(innerHTMLTags[leftTag.style][0]);
     })
-    console.log('temp after left : ', tmp);
 
     sortByLeftTag.map(function(rightTag){
       var position = rightTag.endPosition.toString();
-      console.log('postion :', position);
       tmp[position] = tmp[position] ? tmp[position] : {};
-      console.log("tmp : ", tmp);
       tmp[position].right = tmp[position].right ? tmp[position].right : [];
-      console.log("inner ", rightTag.style);
       tmp[position].right.push(innerHTMLTags[rightTag.style][1]);
     })
-
-    console.log('tmp after right : ', tmp);
 
     var currentPosition = 0;
     var previousPosition = 0;
@@ -140,7 +128,6 @@ function buildMarkdown(rawJSData, innerHTMLTags, blockHTMLTags){
       outputBlock.push(blockHTMLTags[block.type][1]);
     else
       outputBlock.push("</p>");
-    console.log('output : ', outputBlock.join(''));
     return outputBlock.join('');
   });
 

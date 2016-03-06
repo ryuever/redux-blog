@@ -17,7 +17,6 @@ export default function articleMeta (state={
     case CREATE_ARTICLE_META_REQUEST:
     case GET_ARTICLE_META_REQUEST:
     case UPDATE_ARTICLE_META_REQUEST:
-      console.log("create article meta ", action.articleMeta);
       return Object.assign({}, state, action.articleMeta);
 
     case CREATE_ARTICLE_META_FAILURE:

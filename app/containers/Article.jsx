@@ -32,7 +32,6 @@ class Article extends Component {
   }
 
   render(){
-    console.log("article render function -----------");
     return(
       <section>
         <div dangerouslySetInnerHTML={{__html: converter.makeHtml(this.props.presentTitle)}} />

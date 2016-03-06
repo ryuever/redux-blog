@@ -1,6 +1,7 @@
 import {polyfill} from 'es6-promise';
 import md5 from 'spark-md5'
-import _ from 'lodash'
+// import _ from 'lodash'
+
 
 import * as types from '../constants'
 import {createArticleMeta} from './articleMeta'
@@ -8,7 +9,6 @@ import {clearNewArticleTags} from './tag'
 import { browserHistory } from 'react-router'
 
 export function titleTyping(text){
-  console.log("text in article title typing action : ", text)
   return{
     type: types.TITLE_TYPING,
     articleTitle: text
@@ -23,7 +23,6 @@ export function contentTyping(text){
 }
 
 function createArticleRequest(article){
-  console.log("return from article action");
   let articleId = article._id;
 
   return {
@@ -51,7 +50,6 @@ export function createArticle(){
       url: '/api/article'
     })
      .done(function(article){
-       console.log("post successful", article);
        dispatch(createArticleMeta(article._id));
        dispatch(clearNewArticleTags());
        dispatch(createArticleRequest(article));
@@ -65,13 +63,11 @@ export function createArticle(){
 
 export function getArticles(){
   return (dispatch, getState) => {
-    console.log('get articles action');
     $.ajax({
       type: "GET",
       url: '/api/articles'
     })
      .done(function(articles){
-       console.log("get articles successful !", articles);
        /* var tmp = articles.map(function(article){
           return _.pick(article, ['_id', 'content', 'title'])
           }); */
@@ -82,7 +78,6 @@ export function getArticles(){
        })
      })
      .fail(function(jqXHR){
-       console.log("get articles error !");
        return dispatch({
          type: types.GET_ARTICLES_REQUEST
        })
@@ -91,7 +86,6 @@ export function getArticles(){
 }
 
 export function getArticle(id){
-  console.log("get article : ")
   return (dispatch, getState) => {
     $.ajax({
       type: "GET",
@@ -99,7 +93,6 @@ export function getArticle(id){
     })
      .done(function(article){
        // var tmp = _.pick(article, ['_id', 'content', 'title']);
-       console.log("get article : ", article);
        return dispatch({
          type: types.GET_ARTICLE_REQUEST,
          presentArticle: article

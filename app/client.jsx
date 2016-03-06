@@ -12,7 +12,6 @@ var initialState = {}
 // const initialState = window.__INITIAL_STATE__
 
 function ajaxPromise(type, url){
-  console.log('processing type url', type, url);
   var promise = new Promise(function(resolve, reject){
     $.ajax({
       type: type,
@@ -33,13 +32,11 @@ var $autoLogin = ajaxPromise('POST', '/api/autologin');
 
 $autoLogin
   .then(function(account){
-    console.log("return data ", account);
     var $getArticle = ajaxPromise('GET', '/api/articles');
     var $getTagSuggestion = ajaxPromise('GET', '/api/tags');
 
     Promise.all([$getArticle, $getTagSuggestion])
            .spread(function(articles, tags){
-             console.log("account from client : ", account);
              initialState = {
                article:{
                  articles: articles,
@@ -60,10 +57,7 @@ $autoLogin
                }
              }
 
-             console.log("initial state : ", initialState);
-
              const store = configureStore(initialState, browserHistory);
-             console.log("store in client : ", store);
 
              render(
                <Provider store={store}>

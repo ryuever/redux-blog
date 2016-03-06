@@ -28,7 +28,6 @@ export function createArticleMeta(id){
       data: {articleId: id}
     })
      .done(function(articleMeta){
-       console.log("article meta  : ", articleMeta);
        dispatch({
          type: types.CREATE_ARTICLE_META_REQUEST,
          articleMeta: articleMeta
@@ -43,7 +42,6 @@ export function createArticleMeta(id){
 }
 
 export function updateArticleMeta(id,metasToUpdate){
-  console.log("update article meta")
   return (dispatch, getState) => {
     $.ajax({
       type: "PUT",
@@ -51,15 +49,12 @@ export function updateArticleMeta(id,metasToUpdate){
       data: {metasToUpdate: metasToUpdate}
     })
      .done(function(articleMeta){
-       console.log("updated article Meta from server", articleMeta);
        dispatch({
          type: types.UPDATE_ARTICLE_META_REQUEST,
          articleMeta: articleMeta
        })
      })
      .fail(function(jqXHR){
-       console.log('update error');
-
        dispatch({
          type: types.UPDATE_ARTICLE_META_FAILURE
        })

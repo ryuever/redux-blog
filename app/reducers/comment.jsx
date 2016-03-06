@@ -31,7 +31,6 @@ export default function comment (state = {
         return (comment.articleId == articleId)
       });
 
-      console.log("article Id : ", articleId, commentList);
       if (hasKeyValue.length == 0){
         tmp = [...comments, {articleId: articleId, comments: commentList}]
       }
@@ -41,8 +40,6 @@ export default function comment (state = {
     case CREATE_COMMENT_REQUEST:
       newComment = action.comment;
       comments = state.comments
-
-      console.log("new comment ", newComment);
 
       var tmp = comments.map(function(comment){
         if (comment.articleId == newComment.articleId){

@@ -5,4 +5,7 @@
 // require ('./vendor/toopay-bootstrap-markdown-b206ca0/js/bootstrap-markdown');
 // require('../bower_components/simplemde/dist/simplemde.min.js');
 // require('./vendor/simplemde-markdown-editor/dist/simplemde.min.js');
-require('./vendor/test.js');
+// require('./vendor/test.js');
+
+require('draft-js');
+require('backdraft-js');

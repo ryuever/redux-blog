@@ -44,7 +44,6 @@ class AddArticle extends Component {
   }
 
   render(){
-    console.log("render add article ---------");
 
     return(
       <div className="_rb-add-article">
@@ -72,7 +71,6 @@ AddArticle.propTypes = {
 }
 
 function mapStateToProps(state){
-  console.log("map state to props in add article", state, state.tag.newArticleTag);
   return {
     articleTitle: state.article.newArticle.articleTitle,
     articleContent: state.article.newArticle.articleContent,

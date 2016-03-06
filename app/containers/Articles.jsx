@@ -7,7 +7,6 @@ import ArticleListItem from '../components/ArticleListItem';
 
 class Articles extends Component{
   componentDidMount(){
-    console.log('component did mount in articles');
     const {dispatch} = this.props;
     dispatch(getArticles());
   }
@@ -19,7 +18,6 @@ class Articles extends Component{
 
   render(){
     const {articles} = this.props
-    console.log("articles tags : ", articles, articles.tags);
     return(
       <div className="_rb-articles-main">
 
@@ -45,7 +43,6 @@ Articles.propTypes = {
 }
 
 function mapStateToProps(state){
-  console.log("total list : ", state.article.articles);
   return{
     articles: state.article.articles
   }

@@ -2,9 +2,11 @@ import React, {Component, PropTypes} from 'react';
 import ReactDOM from 'react-dom';
 import classNames from 'classnames'
 
-import ArticleCommentListItemFooter from './ArticleCommentListItemFooter';
+// import ArticleCommentListItemFooter from 'ArticleCommentListItemFooter';
+
 import ArticleCommentReplyEntry from './ArticleCommentReplyEntry';
 import ArticleCommentListItemTop from './ArticleCommentListItemTop';
+import ArticleCommentListItemFooter from './ArticleCommentListItemFooter';
 
 import Avatar from "./Avatar"
 
@@ -127,8 +129,6 @@ export default class ArticleCommentListItem extends Component{
         }
 
         commentChild = [userAvatar, commentBody, nested_child]
-
-        console.log("slug_to_data[key] : ", slug_to_data[key]);
 
         child = React.createElement('div', {
           className: classNames('_rb-comment-'+depth, '_rb-comment-item'),

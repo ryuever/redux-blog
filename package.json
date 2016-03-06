@@ -6,12 +6,12 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "clean": "rimraf public/assets",
-    "start": "NODE_ENV=test node server/index.js",
-    "pstart": "NODE_ENV=production node server/index.js",
-    "build:webpack": "NODE_ENV=development webpack --config webpack.config.js --progress --colors -p",
-    "pbuild:webpack": "NODE_ENV=production webpack --config webpack.config.js --progress --colors -p",
+    "start": "NODE_ENV=dev node server/index.js",
+    "pro": "NODE_ENV=production node server/index.js",
+    "build:webpack:pro": "NODE_ENV=production webpack --config ./webpack/webpack.config.prod.js --progress --colors -p",
+    "build:webpack": "NODE_ENV=development webpack --config ./webpack/webpack.config.dev.js --progress --colors -p",
+    "buildpro": "npm run clean && npm run build:webpack:pro",
     "build": "npm run clean && npm run build:webpack",
-    "pbuild": "npm run clean && npm run pbuild:webpack",
     "postinstall": "npm run build"
   },
   "keywords": [

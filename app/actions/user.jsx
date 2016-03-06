@@ -41,7 +41,6 @@ function loginSuccess(account) {
 }
 
 function loginError() {
-  console.log("login error -------------");
   return { type: types.LOGIN_ERROR_USER };
 }
 
@@ -75,7 +74,6 @@ function logoutError() {
 }
 
 export function manualLogin(data) {
-  console.log('manual login data : ', data);
   return dispatch => {
     dispatch(beginLogin());
 

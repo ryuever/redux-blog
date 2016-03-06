@@ -1,4 +1,4 @@
-var Tag = require('../models/tag');
+var Tag = require('../models').Tag;
 
 exports.createTag = function(req, res, next){
 

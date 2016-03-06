@@ -1,6 +1,6 @@
 var {Schema} = require('mongoose');
 
-var db = require('../components/mongodb');
+// var db = require('../components/mongodb');
 
 var ArticleMetaSchema = new Schema({
   articleId: {type: Schema.Types.ObjectId, ref: 'Article'},
@@ -13,4 +13,5 @@ ArticleMetaSchema.virtual('createDate').get(function(){
   return this._id.getTimestamp();
 });
 
-module.exports = db.model('ArticleMeta', ArticleMetaSchema);
+// module.exports = db.model('ArticleMeta', ArticleMetaSchema);
+module.exports = ArticleMetaSchema;

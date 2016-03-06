@@ -1,4 +1,4 @@
-var ArticleMeta = require('../models/article-meta');
+var ArticleMeta = require('../models').ArticleMeta;
 
 exports.createArticleMeta = function(req, res, next){
   console.log('create article meta');

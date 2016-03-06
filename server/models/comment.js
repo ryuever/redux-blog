@@ -1,6 +1,6 @@
 var {Schema} = require('mongoose');
 
-var db = require('../components/mongodb');
+// var db = require('../components/mongodb');
 
 var CommentSchema = new Schema({
   articleId: {type : Schema.Types.ObjectId, ref: 'Article'},
@@ -17,4 +17,5 @@ CommentSchema.virtual('createDate').get(function(){
   return this._id.getTimestamp();
 });
 
-module.exports =db.model('Comment', CommentSchema);
+// module.exports =db.model('Comment', CommentSchema);
+module.exports = CommentSchema;

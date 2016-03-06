@@ -18,7 +18,6 @@ module.exports = function(app){
   // app.use('/blog', blogs);
   app.use(function(req, res, next){
     // console.log("check sessionId ---------- ", req.session);
-    console.log("check req.session id ", req.session.sessionId);
     if(req.session.sessionId){
       console.log('set session id');
       // req.set('_sessionId', req.session.sessionId);

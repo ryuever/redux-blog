@@ -1,5 +1,6 @@
-var Article = require('../models/article');
-var Tag = require('../models/tag');
+var Article = require('../models').Article;
+var Tag = require('../models').Tag;
+
 var Promise = require('bluebird');
 
 exports.postArticle = function(req, res, next){

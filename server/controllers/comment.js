@@ -1,4 +1,5 @@
-var Comment = require("../models/comment");
+var Comment = require("../models").Comment;
+
 var _ = require('lodash');
 
 function createSlug(){

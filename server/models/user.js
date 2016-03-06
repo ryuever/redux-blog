@@ -2,7 +2,7 @@ var bcrypt = require('bcrypt-nodejs');
 var mongoose = require('mongoose');
 var crypto = require('crypto');
 
-var db = require('../components/mongodb');
+// var db = require('../components/mongodb');
 
 var UserSchema = new mongoose.Schema({
   email: { type: String, unique: true, lowercase: true},
@@ -48,4 +48,5 @@ UserSchema.methods = {
 
 UserSchema.statics = {};
 
-module.exports = db.model('User', UserSchema);
+module.exports = UserSchema;
+// module.exports = db.model('User', UserSchema);

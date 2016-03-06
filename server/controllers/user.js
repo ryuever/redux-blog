@@ -1,8 +1,9 @@
 var _ = require('lodash');
 var Promise = require('bluebird');
-var User = require('../models/user');
-var Cookie = require('../mixins/cookie');
 var config = require('config');
+
+var Cookie = require('../mixins/cookie');
+var User = require('../models').User;
 
 exports.postLogin = function(req, res, next){
   const {email, password} = req.body.data;
@@ -53,17 +54,14 @@ exports.postAutoLogin = function(req, res, next){
   }
 }
 
-
 exports.postSignUp = function(req, res, next){
   let {email, password} = req.body.data;
   let $user = User.findOne({email: email}).exec();
 
   $user
     .then(function(existingUser){
-      console.log("check existing user", existingUser);
       if(existingUser){
         res.status(500).send("already exist");
-        console.log('$user is : ', $user);
         // return Promise.reject();
         throw new Error('Dulplicate user');    // bypass promise chain
       }
@@ -76,13 +74,12 @@ exports.postSignUp = function(req, res, next){
     })
 
     .then(function(user){
-      console.log('save successful !', user);
       Cookie.setCookie(req, res, 'uid', user._id);
       return res.status(200).send(user);
     })
     .catch((err)=>{
       if (err){
-        console.log('signup error', err);
+        return res.status(500).send('error');
       }
     });
 };

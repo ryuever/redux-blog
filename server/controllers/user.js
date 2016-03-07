@@ -15,7 +15,6 @@ exports.postLogin = function(req, res, next){
 
           var cookieOptions = {
             domain: config.cookiesDomain,
-            path: '/',
             expires: new Date(Date.now() + config.cookieExpires * 1000)
           };
           res.cookie('uid', user._id, cookieOptions);
@@ -86,8 +85,7 @@ exports.postSignUp = function(req, res, next){
 
 exports.getLogout = function(req, res, next){
   var cookieOptions = {
-    domain: config.cookiesDomain,
-    path: '/'
+    domain: config.cookiesDomain
   };
   res.clearCookie('uid', cookieOptions);
   req.session.destroy(function(e){ res.status(200).send('ok'); });

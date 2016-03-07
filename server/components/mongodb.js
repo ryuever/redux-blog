@@ -7,10 +7,9 @@ mongoose.promise = require('bluebird');
 var opt = {};
 if(config.mongoAuthDB)
   opt = {"auth": {"authdb":config.mongoAuthDB}};
-
 var db = mongoose.createConnection(config.mongodb, opt);
 db.once('open', function(){
-  logger.info('MongoDB has been connected on port 27017');
+  logger.info('MongoDB has been connected db '+ config.mongodbName + ' on port 27017');
 });
 
 module.exports = db;

@@ -60,7 +60,7 @@ exports.postSignUp = function(req, res, next){
   $user
     .then(function(existingUser){
       if(existingUser){
-        res.status(500).send("already exist");
+        // return res.status(500).send("already exist");
         // return Promise.reject();
         throw new Error('Dulplicate user');    // bypass promise chain
       }

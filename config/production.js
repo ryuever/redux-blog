@@ -4,5 +4,6 @@ module.exports = {
   mongodbName: 'redux_blog',
   cookiesDomain: '139.162.59.123',
   cookieExpires: 86400,
-  sessionSecret: 'simplereduxinstance'
+  sessionSecret: 'simplereduxinstance',
+  webpackConf: 'webpack.config.prod'
 };

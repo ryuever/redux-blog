@@ -5,5 +5,6 @@ module.exports ={
   cookiesDomain: 'localhost',
   cookiesPath: '/',
   cookieExpires: 86400,
-  sessionSecret: 'simplereduxinstance'
+  sessionSecret: 'simplereduxinstance',
+  webpackConf: 'webpack.config.dev'
 };

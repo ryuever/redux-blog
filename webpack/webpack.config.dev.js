@@ -56,7 +56,10 @@ var config = {
     modulesDirectories: [
       'node_modules', 'app'
     ],
-    fallback: path.resolve(__dirname, '..', 'app')
+    fallback: path.resolve(__dirname, '..', 'app'),
+    alias: {
+      MakeRequest: path.resolve(__dirname, '..', 'app/util/MakeRequest')
+    }
   }
 }
 

@@ -1,32 +1,5 @@
-// Including es6-promise so isomorphic fetch will work
-import 'es6-promise';
-// import fetch from 'isomorphic-fetch';
-
 import * as types from '../constants';
-import { browserHistory } from 'react-router'
-
-
-// Note this can be extracted out later
-/*
- * Utility function to make AJAX requests using isomorphic fetch.
- * You can also use jquery's $.ajax({}) if you do not want to use the
- * /fetch API.
- * @param Object Data you wish to pass to the server
- * @param String HTTP method, e.g. post, get, put, delete
- * @param String endpoint - defaults to /login
- * @return Promise
- */
-/* function makeUserRequest(method, data, api='/login') {
-   return fetch(api, {
-   method: method,
-   credentials: 'same-origin',
-   headers: {
-   'Accept': 'application/json',
-   'Content-Type': 'application/json'
-   },
-   body: JSON.stringify(data)
-   });
-   } */
+import { browserHistory } from 'react-router';
 
 // Log In Action Creators
 function beginLogin() {
@@ -73,21 +46,28 @@ function logoutError() {
   return { type: types.LOGOUT_ERROR_USER};
 }
 
+// var MakeRequest = require('Util/MakeRequest');
+import MakeRequest from '../util/MakeRequest';
+
 export function manualLogin(data) {
   return dispatch => {
     dispatch(beginLogin());
 
-    $.ajax({
-      type: 'POST',
+    MakeRequest.post({
       url: '/api/login',
       data: {data: data}
     })
-     .done((account) => {
-       return dispatch(loginSuccess(account));
-     })
-     .fail((jqXHR) => {
-       return dispatch(loginError())
-     })
+      .then((res) => {
+        if (res.status >= 400) {
+          dispatch(loginError());
+          throw new Error("Bad response from server");
+        }
+        return res.json();
+      })
+      .then((account) => {
+        console.log('account : ', account);
+        return dispatch(loginSuccess(account));
+      });
   };
 }
 
@@ -95,32 +75,38 @@ export function signUp(data) {
   return dispatch => {
     dispatch(beginSignUp());
 
-    $.ajax({
-      type: "POST",
+    MakeRequest.post({
       url: "/api/signup",
       data: {data: data}
     })
-     .done((account)=>{
-       return dispatch(signUpSuccess(account));
-     })
-     .fail(()=>{
-       return dispatch(signUpError());
-     })
+      .then((res) => {
+        if (res.status >= 400) {
+          dispatch(signUpError());
+          throw new Error("Bad response from server");
+        }
+        return res.json();
+      })
+      .then((account) => {
+        dispatch(signUpSuccess(account));
+      });
   };
 }
 
 export function logout(){
   return (dispatch, getState) => {
-    $.ajax({
-      type: "GET",
+    MakeRequest.get({
       url: '/api/logout'
     })
-     .done(function(){
-       dispatch(logoutSuccess());
-       browserHistory.push('/login')
-     })
-     .fail(function(){
-       dispatch(logoutError());
-     })
-  }
+      .then((res) => {
+        if (res.status >= 400) {
+          dispatch(logoutError());
+          throw new Error("Bad response from server");
+        }
+        return res.json();
+      })
+      .then((account) => {
+        dispatch(logoutSuccess());
+        browserHistory.push('/login');
+      });
+  };
 }

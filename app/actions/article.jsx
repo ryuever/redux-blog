@@ -1,9 +1,6 @@
-import {polyfill} from 'es6-promise';
-import md5 from 'spark-md5'
-// import _ from 'lodash'
-
-
 import * as types from '../constants'
+import MakeRequest from '../util/MakeRequest';
+
 import {createArticleMeta} from './articleMeta'
 import {clearNewArticleTags} from './tag'
 import { browserHistory } from 'react-router'
@@ -44,64 +41,70 @@ export function createArticle(){
       tags
     };
 
-    $.ajax({
-      type: 'POST',
+    MakeRequest.post({
+      url: '/api/article',
       data: data,
-      url: '/api/article'
     })
-     .done(function(article){
+      .then((res) => {
+        if (res.status >= 400) {
+
+          console.log("post error");
+          throw new Error("Bad response from server");
+        }
+        return res.json();
+      })
+     .then((article) => {
        dispatch(createArticleMeta(article._id));
        dispatch(clearNewArticleTags());
        dispatch(createArticleRequest(article));
        browserHistory.push('/articles')
-     })
-     .fail(function(jqXHR){
-       console.log("post error");
-     })
+      });
   }
 }
 
 export function getArticles(){
   return (dispatch, getState) => {
-    $.ajax({
-      type: "GET",
+    MakeRequest.get({
       url: '/api/articles'
     })
-     .done(function(articles){
-       /* var tmp = articles.map(function(article){
-          return _.pick(article, ['_id', 'content', 'title'])
-          }); */
-
-       return dispatch({
+      .then((res) => {
+        if (res.status >= 400) {
+          dispatch({
+            type: types.GET_ARTICLES_REQUEST
+          });
+          throw new Error("Bad response from server");
+        }
+        return res.json();
+      })
+               .then((articles) => {
+                 console.log('articles : ', articles);
+       dispatch({
          type: types.GET_ARTICLES_REQUEST,
          articles: articles
        })
-     })
-     .fail(function(jqXHR){
-       return dispatch({
-         type: types.GET_ARTICLES_REQUEST
-       })
-     });
+      });
   }
 }
 
 export function getArticle(id){
   return (dispatch, getState) => {
-    $.ajax({
-      type: "GET",
+    MakeRequest.get({
       url: "/api/article/"+id,
     })
-     .done(function(article){
-       // var tmp = _.pick(article, ['_id', 'content', 'title']);
-       return dispatch({
+      .then((res) => {
+        if (res.status >= 400) {
+          dispatch({
+            type: types.GET_ARTICLE_FAILURE
+          })
+          throw new Error("Bad response from server");
+        }
+        return res.json();
+      })
+     .then((article) => {
+       dispatch({
          type: types.GET_ARTICLE_REQUEST,
          presentArticle: article
        })
-     })
-     .fail(function(jqXHR){
-       return dispatch({
-         type: types.GET_ARTICLE_FAILURE
-       })
-     })
+     });
   }
 }

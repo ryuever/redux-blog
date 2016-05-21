@@ -50,11 +50,6 @@ export function tagDrag(tag, currPos, newPos){
   }
 }
 
-/* export function createTags(){
-   return (dispatch, getState) =>{
- */
-
-
 export function clearNewArticleTags(){
   return {
     type: types.CLEAR_NEW_ARTICLE_TAGS

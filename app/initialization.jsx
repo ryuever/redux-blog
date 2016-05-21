@@ -1,18 +1,5 @@
 import {Promise} from 'bluebird'
 
-
-/* function promisify(fn){
-   if (!Array.isArray(fn)){
-   fn = [fn];
-   }
-
-   var promise = new Promise(function(resolve, reject){
-
-
-   })
-
-   } */
-
 function ajaxPromise(type, url){
   console.log('processing type url', type, url);
   var promise = new Promise(function(resolve, reject){

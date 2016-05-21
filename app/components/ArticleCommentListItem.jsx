@@ -2,8 +2,6 @@ import React, {Component, PropTypes} from 'react';
 import ReactDOM from 'react-dom';
 import classNames from 'classnames'
 
-// import ArticleCommentListItemFooter from 'ArticleCommentListItemFooter';
-
 import ArticleCommentReplyEntry from './ArticleCommentReplyEntry';
 import ArticleCommentListItemTop from './ArticleCommentListItemTop';
 import ArticleCommentListItemFooter from './ArticleCommentListItemFooter';

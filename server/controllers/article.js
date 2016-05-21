@@ -4,18 +4,14 @@ var Tag = require('../models').Tag;
 var Promise = require('bluebird');
 
 exports.postArticle = function(req, res, next){
-  console.log('call article post api');
   var {newTitle, newContent, tags} = req.body;
   var _sessionId = req._sessionId;
   tags = tags || [];
-  console.log("tags : ", tags);
 
   var $checkTags = Promise.map(tags, function(tag){
-    console.log("check tags");
     return Tag.findOne({_id: tag.id}).exec();
   });
 
-  console.log('hhah');
   $checkTags
     .then(function(fetchTags){
       var $newArticle = new Article({
@@ -42,7 +38,6 @@ exports.postArticle = function(req, res, next){
     })
     .catch(function(err){
       if(err){
-        console.log('err : ', err);
         res.status(500).send('error');
       }
     });
@@ -51,7 +46,7 @@ exports.postArticle = function(req, res, next){
 exports.getArticles = function(req, res, next){
 
   var _sessionId = req._sessionId;
-  console.log("get article", _sessionId) ;
+  console.log('session from articles: ', _sessionId);
   var $articles = Article.find({
     creatorId: _sessionId
   }).exec();
@@ -67,7 +62,6 @@ exports.getArticles = function(req, res, next){
 
           return $populateTags
             .then(function(tags){
-              console.log("popuate tags : ", tags);
               var ret = {
                 _id: article._id,
                 title: article.title,
@@ -80,14 +74,12 @@ exports.getArticles = function(req, res, next){
         });
       }})
     .then(function(ret){
-      console.log("begin to return from article");
-      console.log("return tags ", ret.tags);
+      console.log('article return ', ret);
       if(ret)
         return res.status(200).send(ret);
     })
     .catch(function(err){
       if(err){
-        console.log('get articles error : ', err);
         res.status(500).send('error');
       }
     });
@@ -97,7 +89,6 @@ exports.getArticle = function(req, res, next){
 
   var {id} = req.params;
   var _sessionId = req._sessionId;
-  console.log('id and _sessionId', id, _sessionId);
 
   var $article = Article.findOne({
     creatorId: _sessionId,
@@ -118,7 +109,6 @@ exports.getArticle = function(req, res, next){
     })
     .catch(function(err){
       if(err){
-        console.log("get article error : ", err);
         res.status(500).send('error');
       }
     });

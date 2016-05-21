@@ -1,5 +1,6 @@
 import * as types from '../constants';
 import { browserHistory } from 'react-router';
+import MakeRequest from '../util/MakeRequest';
 
 // Log In Action Creators
 function beginLogin() {
@@ -46,28 +47,27 @@ function logoutError() {
   return { type: types.LOGOUT_ERROR_USER};
 }
 
-// var MakeRequest = require('Util/MakeRequest');
-import MakeRequest from '../util/MakeRequest';
-
 export function manualLogin(data) {
   return dispatch => {
     dispatch(beginLogin());
 
-    MakeRequest.post({
-      url: '/api/login',
-      data: {data: data}
-    })
-      .then((res) => {
-        if (res.status >= 400) {
-          dispatch(loginError());
-          throw new Error("Bad response from server");
-        }
-        return res.json();
-      })
-      .then((account) => {
-        console.log('account : ', account);
-        return dispatch(loginSuccess(account));
-      });
+
+    let request = {};
+    request.method = 'POST'
+    request.path = '/login';
+    request.data = data;
+
+    MakeRequest.send(request)
+               .then((res) => {
+                 if (res.status >= 400) {
+                   dispatch(loginError());
+                   throw new Error("Bad response from server");
+                 }
+                 return res.json();
+               })
+               .then((account) => {
+                 return dispatch(loginSuccess(account));
+               });
   };
 }
 
@@ -75,38 +75,43 @@ export function signUp(data) {
   return dispatch => {
     dispatch(beginSignUp());
 
-    MakeRequest.post({
-      url: "/api/signup",
-      data: {data: data}
-    })
-      .then((res) => {
-        if (res.status >= 400) {
-          dispatch(signUpError());
-          throw new Error("Bad response from server");
-        }
-        return res.json();
-      })
-      .then((account) => {
-        dispatch(signUpSuccess(account));
-      });
+    let request = {};
+    request.method = 'POST'
+    request.path = '/signup';
+    request.data = data;
+
+    MakeRequest.send(request)
+               .then((res) => {
+                 if (res.status >= 400) {
+                   dispatch(signUpError());
+                   throw new Error("Bad response from server");
+                 }
+                 return res.json();
+               })
+               .then((account) => {
+                 dispatch(signUpSuccess(account));
+               });
   };
 }
 
 export function logout(){
   return (dispatch, getState) => {
-    MakeRequest.get({
-      url: '/api/logout'
-    })
-      .then((res) => {
-        if (res.status >= 400) {
-          dispatch(logoutError());
-          throw new Error("Bad response from server");
-        }
-        return res.json();
-      })
-      .then((account) => {
-        dispatch(logoutSuccess());
-        browserHistory.push('/login');
-      });
+
+    let request = {};
+    request.method = 'GET'
+    request.path = '/logout';
+
+    MakeRequest.send(request)
+               .then((res) => {
+                 if (res.status >= 400) {
+                   dispatch(logoutError());
+                   throw new Error("Bad response from server");
+                 }
+                 return res.json();
+               })
+               .then((account) => {
+                 dispatch(logoutSuccess());
+                 browserHistory.push('/login');
+               });
   };
 }

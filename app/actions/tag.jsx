@@ -1,4 +1,5 @@
 import * as types from '../constants';
+import MakeRequest from '../util/MakeRequest';
 
 export function tagAddition(tag){
 
@@ -11,26 +12,30 @@ export function tagAddition(tag){
         return false;
     }
 
-    var data ={
+    let request = {};
+    request.method = 'POST'
+    request.path = '/tag';
+    request.data = {
       name: tag
     }
 
-    $.ajax({
-      type: "POST",
-      url: '/api/tag',
-      data: data
-    })
-     .done(function(tag){
-       dispatch({
-         type: types.CREATE_ARTICLE_TAG_REQUEST,
-         tag: tag
-       })
-     })
-     .fail(function(jqXHR){
-       dispatch({
-         type: types.CREATE_ARTICLE_TAG_FAILURE
-       })
-     })
+    MakeRequest.send(request)
+               .then((res) => {
+                 if (res.status >= 400) {
+                   dispatch({
+                     type: types.CREATE_ARTICLE_TAG_FAILURE
+                   })
+                   throw new Error("Bad response from server");
+                 }
+                 return res.json();
+               })
+
+               .then((tag) => {
+                 dispatch({
+                   type: types.CREATE_ARTICLE_TAG_REQUEST,
+                   tag: tag
+                 })
+               });
   }
 }
 

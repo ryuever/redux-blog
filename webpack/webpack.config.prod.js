@@ -46,11 +46,6 @@ var webpack_config = {
     //     'NODE_ENV': JSON.stringify('production')
     //   }
     // }),
-    new webpack.ProvidePlugin({
-      $: "jquery",
-      jQuery: "jquery",
-      "window.jQuery": "jquery"
-    }),
     new webpack.optimize.CommonsChunkPlugin("vendor", "vendor.bundle.js"),
     new ExtractTextPlugin("[name].css")
     //

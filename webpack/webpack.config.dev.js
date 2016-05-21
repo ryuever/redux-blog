@@ -27,11 +27,6 @@ var config = {
       __TEST__: JSON.stringify(JSON.parse(process.env.TEST_ENV || 'false')),
       __DEV__: true
     }),
-    new webpack.ProvidePlugin({
-      $: "jquery",
-      jQuery: "jquery",
-      "window.jQuery": "jquery"
-    }),
     new webpack.optimize.CommonsChunkPlugin("vendor", "vendor.bundle.js"),
     new ExtractTextPlugin("[name].css")
   ],

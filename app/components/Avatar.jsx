@@ -11,7 +11,6 @@ class Avatar extends Component{
       </div>
     )
   }
-
 }
 
 export default Avatar

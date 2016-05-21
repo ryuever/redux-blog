@@ -35,76 +35,81 @@ export function createArticle(){
     const newTitle = '<h1>' + newArticle.articleTitle + '</h1>';
     const newContent = newArticle.articleContent;
 
-    const data = {
+    let request = {};
+    request.method = 'POST'
+    request.path = '/article';
+    request.data = {
       newTitle,
       newContent,
       tags
-    };
+    }
 
-    MakeRequest.post({
-      url: '/api/article',
-      data: data,
-    })
-      .then((res) => {
-        if (res.status >= 400) {
+    MakeRequest.send(request)
+               .then((res) => {
+                 if (res.status >= 400) {
+                   console.log("post error");
+                   throw new Error("Bad response from server");
+                 }
+                 return res.json();
+               })
 
-          console.log("post error");
-          throw new Error("Bad response from server");
-        }
-        return res.json();
-      })
-     .then((article) => {
-       dispatch(createArticleMeta(article._id));
-       dispatch(clearNewArticleTags());
-       dispatch(createArticleRequest(article));
-       browserHistory.push('/articles')
-      });
+               .then((article) => {
+                 dispatch(createArticleMeta(article._id));
+                 dispatch(clearNewArticleTags());
+                 dispatch(createArticleRequest(article));
+                 browserHistory.push('/articles')
+               });
   }
 }
 
 export function getArticles(){
   return (dispatch, getState) => {
-    MakeRequest.get({
-      url: '/api/articles'
-    })
-      .then((res) => {
-        if (res.status >= 400) {
-          dispatch({
-            type: types.GET_ARTICLES_REQUEST
-          });
-          throw new Error("Bad response from server");
-        }
-        return res.json();
-      })
+    let request = {};
+    request.method = 'GET'
+    request.path = '/articles';
+
+    MakeRequest.send(request)
+               .then((res) => {
+                 if (res.status >= 400) {
+                   dispatch({
+                     type: types.GET_ARTICLES_REQUEST
+                   });
+                   throw new Error("Bad response from server");
+                 }
+                 return res.json();
+               })
                .then((articles) => {
                  console.log('articles : ', articles);
-       dispatch({
-         type: types.GET_ARTICLES_REQUEST,
-         articles: articles
-       })
-      });
+                 dispatch({
+                   type: types.GET_ARTICLES_REQUEST,
+                   articles: articles
+                 })
+               });
   }
 }
 
 export function getArticle(id){
   return (dispatch, getState) => {
-    MakeRequest.get({
-      url: "/api/article/"+id,
-    })
-      .then((res) => {
-        if (res.status >= 400) {
-          dispatch({
-            type: types.GET_ARTICLE_FAILURE
-          })
-          throw new Error("Bad response from server");
-        }
-        return res.json();
-      })
-     .then((article) => {
-       dispatch({
-         type: types.GET_ARTICLE_REQUEST,
-         presentArticle: article
-       })
-     });
+
+    let request = {};
+    request.method = 'GET'
+    request.path = `/article/${id}`;
+
+    MakeRequest.send(request)
+               .then((res) => {
+                 if (res.status >= 400) {
+                   dispatch({
+                     type: types.GET_ARTICLE_FAILURE
+                   });
+                   throw new Error("Bad response from server");
+                 }
+                 return res.json();
+               })
+               .then((article) => {
+                 dispatch({
+                   type: types.GET_ARTICLE_REQUEST,
+                   presentArticle: article
+                 })
+               });
   }
 }

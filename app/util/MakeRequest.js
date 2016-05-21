@@ -5,32 +5,25 @@ import Helper from './Helper';
 
 class MakeRequest{
 
-  static get(req) {
-    const {url, query} = req;
+  static send(request) {
+    let url = '';
+    let ApiEndPoint = '/api'
+    let queryString = ''
 
-    let location = url
-    if (query) {
-      let queryString = Helper.concatQueryString(query);
-      location = `${url}?${queryString}`;
+    const { method, endPoint, path, unLoading, data, query } = request;
+
+    if (endPoint) {
+      ApiEndPoint = endPoint;
     }
 
-    return fetch(location, {
-      method: 'GET',
-      credentials: 'same-origin'
-    });
-  }
-
-  static post(req) {
-    const {url, query, data} = req
-
-    let location = url
     if (query) {
-      let queryString = Helper.concatQueryString(query);
-      location = `${url}?${queryString}`;
+      queryString = `?${Helper.concatQueryString(query)}`;
     }
 
-    return fetch(location, {
-      method: 'POST',
+    url = `${ApiEndPoint}${path}${queryString}`;
+
+    return fetch(url, {
+      method: method,
       credentials: 'same-origin',
       headers: {
         'Accept': 'application/json',
@@ -38,7 +31,23 @@ class MakeRequest{
       },
       body: JSON.stringify(data)
     });
-  };
+  }
+
+  static delay(request) {
+    return new Promise((resolve, reject) => {
+      MakeRequest.send(request)
+                 .then((res) => {
+                   if (res.status >= 400) {
+                     reject();
+                   }
+                   return res.json();
+                 })
+                 .then((data) => {
+                   resolve(data);
+                 })
+
+    })
+  }
 };
 
 export default MakeRequest;

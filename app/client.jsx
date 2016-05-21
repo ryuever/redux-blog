@@ -7,33 +7,26 @@ import configureStore from './store/configureStore'
 import {Promise} from 'bluebird';
 
 import routes from './routes'
+import MakeRequest from './util/MakeRequest';
 
 var initialState = {}
-// const initialState = window.__INITIAL_STATE__
 
-function ajaxPromise(type, url){
-  var promise = new Promise(function(resolve, reject){
-    $.ajax({
-      type: type,
-      url: url
-    })
-     .done(function(data){
-       return resolve(data)
-     })
-     .fail(function(jqXHR){
-       return reject()
-     })
-  });
-
-  return promise;
-}
-
-var $autoLogin = ajaxPromise('POST', '/api/autologin');
+let loginRequest = {};
+loginRequest.method = 'POST';
+loginRequest.path = '/autologin';
+var $autoLogin = MakeRequest.delay(loginRequest);
 
 $autoLogin
   .then(function(account){
-    var $getArticle = ajaxPromise('GET', '/api/articles');
-    var $getTagSuggestion = ajaxPromise('GET', '/api/tags');
+    let articleRequest = {};
+    articleRequest.method = 'GET';
+    articleRequest.path = '/articles';
+    var $getArticle = MakeRequest.delay(articleRequest);
+
+    let getTagRequest = {};
+    getTagRequest.method = 'GET';
+    getTagRequest.path = '/tags';
+    var $getTagSuggestion = MakeRequest.delay(getTagRequest);
 
     Promise.all([$getArticle, $getTagSuggestion])
            .spread(function(articles, tags){

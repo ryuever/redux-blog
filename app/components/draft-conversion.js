@@ -1,5 +1,3 @@
-var _ = require('lodash');
-
 function compare(a,b) {
   if (a.startPosition < b.startPosition)
     return -1;

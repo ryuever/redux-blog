@@ -1,5 +1,6 @@
 require('es6-promise').polyfill();
-require('isomorphic-fetch');
+import fetch from "isomorphic-fetch"
+import { Promise } from 'es6-promise';
 
 import Helper from './Helper';
 
@@ -20,11 +21,13 @@ class MakeRequest{
       queryString = `?${Helper.concatQueryString(query)}`;
     }
 
-    url = `${ApiEndPoint}${path}${queryString}`;
+    url = `http://localhost:5000${ApiEndPoint}${path}${queryString}`;
+
+    console.log(' send ulr : ', url, fetch, method);
 
     return fetch(url, {
       method: method,
-      credentials: 'same-origin',
+      credentials: 'include',
       headers: {
         'Accept': 'application/json',
         'Content-Type': 'application/json'
@@ -35,14 +38,17 @@ class MakeRequest{
 
   static delay(request) {
     return new Promise((resolve, reject) => {
+      console.log('make reqest : ', MakeRequest.send(request));
       MakeRequest.send(request)
                  .then((res) => {
+                   console.log('res status : ', res.status, res.json());
                    if (res.status >= 400) {
-                     reject();
+                     return reject();
                    }
                    return res.json();
                  })
                  .then((data) => {
+                   console.log('res data : ', data);
                    resolve(data);
                  })
 

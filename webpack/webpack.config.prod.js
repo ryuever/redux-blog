@@ -16,7 +16,7 @@ var webpack_config = {
   entry:{
     app: path.join(__dirname, '..', 'app', 'client'),
     vendor: path.join(__dirname, '..', 'app', 'vendor'),
-    style: path.join(__dirname, '..', 'app', 'stylesheets/_rb-main')
+    style: path.join(__dirname, '..', 'app', 'stylesheets/rbMain')
   },
   output: {
     path: assetsPath,

@@ -71,7 +71,7 @@ module.exports = [
     entry: {
       app: "./client",
       vendor: './vendor',
-      style: './stylesheets/rbMain'
+      style: './stylesheets/rb-main'
     },
     output: {
       // The output directory as absolute path

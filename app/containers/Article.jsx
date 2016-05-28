@@ -18,12 +18,6 @@ class Article extends Component {
     dispatch(getArticle(id));
    }
 
-  /* getInitialState(){
-     const {dispatch} = this.props;
-     const id = this.props.params.id
-     dispatch(getArticle(id));
-     } */
-
   componentDidMount(){
     const {dispatch} = this.props;
     const id = this.props.params.id
@@ -35,7 +29,7 @@ class Article extends Component {
     return(
       <section>
         <div dangerouslySetInnerHTML={{__html: converter.makeHtml(this.props.presentTitle)}} />
-        <div className="_rb-article-meta">
+        <div className="rb-article-meta">
           <span>浏览{this.props.viewCount}</span>
           <span>喜欢{this.props.upVote}</span>
         </div>

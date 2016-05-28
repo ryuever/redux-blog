@@ -1,0 +1,128 @@
+//---------------- for articles page --------------------//
+.rb-articles-main{
+    top: 15px;
+    position: relative;
+    width: 660px;
+    padding-left: 20px;
+    padding-right: 20px;
+    box-sizing: border-box;
+}
+.rb-articles-main .rb-articles-page-title {
+    height: 100px;
+}
+
+//---------------- for articles page --------------------//
+.rb-article-list-item {
+    border-radius: 3px;
+    padding-top: 10px;
+    border: 1px solid #eee;
+    margin-bottom: 10px;
+    height: 200px;
+    position: relative;
+
+    &:hover {
+        cursor: hand;
+    }
+
+    .rb-article-single-column,
+    .rb-post-preview-footer-meta,
+    .rb-article-post-meta-social {
+        padding-left: 15px;
+        padding-right: 15px;
+    }
+}
+.meta-grey {
+    font-size: 12px;
+    line-height: 1.2;
+    color: rgba(0,0,0,.44);
+}
+.rb-article-item-title {
+    text-decoration: none;
+
+    a:hover& {
+        text-decoration: none;
+    }
+
+    a& {
+        color:#333333
+    }
+}
+.rb-post-preview-footer-meta {
+    position: absolute;
+    bottom: 0px;
+    height: 40px;
+    width: 100%;
+    box-sizing: border-box;
+
+    a {
+        color: rgba(0,0,0,.44);
+        text-decoration: none;
+    }
+
+    a:hover {
+        color: rgba(0,0,0,.3);
+    }
+
+    .rb-article-item-meta-link {
+        color: @light-blue;
+    }
+}
+
+.rb-article-meta {
+    margin: 20px;
+    span {
+        margin-right: 10px;
+        font-size: 12px;
+        color: #999999
+    }
+}
+
+
+
+
+
+
+
+
+//---------------- for article page --------------------//
+.rb-article-main{
+    margin-left: auto;
+    margin-right: auto;
+    top: 15px;
+    position: relative;
+    width: 770px;
+}
+
+
+// -- recent not used
+.add-article-main .add-article-page-title{
+    height: 100px;
+    border-bottom: 1px solid #eeeeee;
+    margin-bottom: 40px;
+}
+
+// add artile title input
+.rb-article-title-input {
+    position: fixed;
+    width: 40%;
+    top: 48px;
+    font-size: @font-size-base;
+    padding: @padding-base-vertical @padding-base-horizontal;
+    border: 1px solid @input-border;
+    border-radius: @input-border-radius;
+}
+
+.rb-post-article{
+    position: fixed;
+    right: 33%;
+    top: 52px;
+}
+
+.rb-add-article-tags-container{
+    position: fixed;
+    top: 48px;
+    width: 22%;
+    height: 100%;
+    right: 0px;
+    padding-top: 48px;
+}

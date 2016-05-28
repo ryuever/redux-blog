@@ -9,9 +9,6 @@ export default class App extends Component {
   render() {
     return (
       <div className="rb-app">
-        <div className="rb-nav-bar">
-          <Navigation />
-        </div>
         <div className="rb-header">
           <AppHeader />
         </div>

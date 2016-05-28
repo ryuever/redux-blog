@@ -36,6 +36,7 @@ function renderFullPage(renderedContent, initialState, head={
     <link rel="stylesheet" type="text/css" href="/assets/style.css" />
     <link rel="stylesheet" type="text/css" href="/Draft.css" />
     <link rel="stylesheet" type="text/css" href="/reactTags.css" />
+    <link rel="stylesheet" type="text/css" href="/modal.css" />
     </body>
     </html>
 
@@ -89,7 +90,7 @@ export default function render(req, res) {
       const renderedPage = renderFullPage(renderedContent, initialState, {
         title: '',
         meta: '<meta name="viewport" content="width=device-width, initial-scale=1" />',
-        link: '<link rel="stylesheet" href="/assets/style.css"/>'
+        link: '<link rel="stylesheet" href=""/>'
       });
       res.status(200).send(renderedPage);
     } else {

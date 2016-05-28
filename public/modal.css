@@ -1,0 +1,128 @@
+.flex-input {
+  padding: 6px;
+  font-size: 14px;
+  line-height: 20px;
+  border-radius: 3px;
+  border: 1px solid #ccc;
+  box-sizing: border-box;
+}
+.flex-input:focus {
+  outline: none;
+}
+.flexible {
+  width: 80%;
+}
+.flex-input-group input {
+  margin-top: 30px;
+  margin-left: 10%;
+}
+.flex-input-group .flex-btn {
+  margin-left: 10%;
+  width: 80%;
+  margin-top: 40px;
+}
+.flex-btn {
+  font-size: 14px;
+  line-height: 20px;
+  padding: 6px 12px;
+  border-radius: 3px;
+  border: 1px solid #ccc;
+  background: #fff;
+}
+.flex-btn:focus {
+  outline: none;
+}
+.flex-btn:hover {
+  color: #373a3c;
+  background-color: #e6e6e6;
+  border-color: #adadad;
+}
+.flex-modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 1050;
+  overflow-x: hidden;
+  overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
+  text-align: center;
+  background: rgba(0, 0, 0, 0.5);
+}
+.flex-modal-middle-base {
+  display: inline-block;
+  height: 100%;
+  vertical-align: middle;
+}
+.flex-modal-content {
+  display: inline-block;
+  text-align: left;
+  max-width: 100%;
+  cursor: default;
+  vertical-align: middle;
+  background: #eee;
+  height: 30em;
+  background: #fff;
+  width: 350em;
+  border-radius: 6px;
+  max-width: 500px;
+  max-height: 400px;
+}
+.flex-modal-content .alert {
+  height: 13em;
+  background: #fff;
+  width: 16em;
+  border-radius: 6px;
+}
+.flex-modal-header {
+  height: 50px;
+  position: relative;
+  border-bottom: 1px solid #eee;
+}
+.flex-modal-body {
+  position: relative;
+  height: 75%;
+  background: #eee;
+  border-bottom: 1px solid #ccc;
+}
+.flex-modal-footer {
+  height: 10%;
+  position: relative;
+  border-top: 1px solid #eee;
+}
+.flex-modal-header-container {
+  width: 100%;
+  height: 100%;
+  position: relative;
+  border-radius: 4px 4px 0px 0px;
+  background-color: #739664;
+}
+.flex-modal-header-container .icon {
+  display: inline-block;
+  position: relative;
+  width: 30%;
+  height: 100%;
+}
+.flex-modal-header-container .nav-bar {
+  list-style: none;
+}
+.nav-bar-body {
+  display: inline-block;
+}
+.nav-bar-body ul {
+  float: left;
+  line-height: 20px;
+  margin: 0px;
+  list-style: none;
+}
+.nav-bar-body ul li {
+  padding: 15px 50px;
+  float: left;
+}
+.nav-bar-body ul li:hover {
+  background: #598844;
+  color: #ccc;
+}
+
+/*# sourceMappingURL=style.css.map*/

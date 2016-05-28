@@ -18,10 +18,9 @@ import ArticleLayout from './containers/ArticleLayout';
 
 export default (store) => {
 
-  // store could be used to create route auth.
-
   return (
     <Route path="/">
+      <IndexRoute component={Home}/>
       <Route component={Account}>
         <Route path="/signup" component={Signup} />
         <Route path="/login" component={Login} />

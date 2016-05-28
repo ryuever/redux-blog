@@ -11,17 +11,12 @@ class Articles extends Component{
     dispatch(getArticles());
   }
 
-  componentWillReceiveProps(){
-
-
-  }
-
   render(){
     const {articles} = this.props
     return(
-      <div className="_rb-articles-main">
+      <div className="rb-articles-main">
 
-        <section className="_rb-article-list">
+        <section className="rb-article-list">
           {articles.map(function(article){
             return <ArticleListItem
             key={article._id}

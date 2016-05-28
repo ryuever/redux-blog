@@ -11,19 +11,19 @@ class Account extends Component {
     let isSignup = pathname === '/signup' ? true : false;
 
     return (
-      <div className="_rb-account-control-container">
+      <div className="rb-account-control-container">
 
-        <div className="_rb-account-control-logo">
+        <div className="rb-account-control-logo">
           <h1> Vision Seeker </h1>
         </div>
 
-        <div className="_rb-account-control-body center">
-          <div className="_rb-account-control-title center">
+        <div className="rb-account-control-body center">
+          <div className="rb-account-control-title center">
             <span>
-              <Link to="/login" className={classNames({"selected" : isLogin}, '_rb-btn')}> Login </Link>
+              <Link to="/login" className={classNames({"selected" : isLogin}, 'rb-btn')}> Login </Link>
             </span>
             <span>
-              <Link to="/signup" className={classNames({"selected" : isSignup}, '_rb-btn')}> Signup </Link>
+              <Link to="/signup" className={classNames({"selected" : isSignup}, 'rb-btn')}> Signup </Link>
             </span>
           </div>
           {this.props.children}

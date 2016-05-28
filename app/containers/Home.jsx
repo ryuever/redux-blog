@@ -1,32 +1,119 @@
-import React, {Component, PropTypes} from "react";
-import {Link} from 'react-router';
+import React, { Component, PropTypes } from "react";
+import { connect } from 'react-redux';
+import { Link } from 'react-router';
+
+import FlexReactModal from 'flex-react-modal';
+import { manualLogin } from '../actions/user';
 
 class Home extends Component{
 
+  constructor(props) {
+    super(props);
+    this.onLoginClick = this.onLoginClick.bind(this);
+    this.onRegisterClick = this.onRegisterClick.bind(this);
+    this.handleSuccess = this.handleSuccess.bind(this);
+
+    this.config = [
+      {
+        header: '登陆',
+        content: [
+          {
+            component: 'FlexInput',
+            placeholder: '请输入姓名',
+            refer: 'name'
+          },
+          {
+            component: 'FlexInput',
+            placeholder: '请输入密码',
+            type: 'password',
+            refer: 'login_password'
+          },
+          {
+            component: 'FlexButton',
+            content: '确认',
+            handleClick: this.onLoginClick
+          }
+        ]
+      },
+      {
+        header: '注册',
+        content: [
+          {
+            component: 'FlexInput',
+            placeholder: '请输入姓名',
+            refer: 'register_name'
+          },
+          {
+            component: 'FlexInput',
+            placeholder: '请输入密码',
+            type: 'password',
+            refer: 'register_password'
+          },
+          {
+            component: 'FlexInput',
+            placeholder: '请再次输入密码',
+            type: 'password',
+            refer: 'register_confirmed_password'
+          },
+          {
+            component: 'FlexButton',
+            content: '确认',
+            handleClick: this.onRegisterClick
+          }
+        ]
+      }
+    ]
+  }
+
+  onLoginClick(data) {
+    const { dispatch } = this.props;
+
+    dispatch(manualLogin({
+      email: data.name,
+      password: data.login_password
+    }))
+  }
+
+  onRegisterClick(data) {
+    console.log('click register : ', data);
+  }
+
+  handleSuccess() {
+    let router = this.context.router;
+
+    router.replace({
+      pathname: "/articles"
+    })
+  }
+
   render(){
-    var divStyle = {
-      backgroundImage: 'url(/background-cover.jpg)'
-    };
+    const {authenticated, isWaiting} = this.props.user;
+    if (authenticated){
+      this.handleSuccess();
+      return null;
+    }
 
     return(
-      <div
-       className="_rb-panel-cover"
-       style={divStyle}
-       >
-       <div className="_rb-panel-main">
-         <div className="_rb-panel-inner">
-           <div className="_rb-panel-content">
-             <h1> vision seeker </h1>
-             <div className="_rb-panel-navi">
-               <Link to="articles" className="btn"> 欢迎进入小站 </Link>
-             </div>
-           </div>
-         </div>
-
-       </div>
-     </div>
+      <FlexReactModal
+       config={this.config}
+      />
     )
   }
 }
 
-export default Home
+Home.contextTypes = {
+  router: PropTypes.object.isRequired
+}
+
+Home.propTypes = {
+  user: PropTypes.object,
+  dispatch: PropTypes.func
+}
+
+function mapStateToProps(state){
+  return {
+    user: state.user
+  }
+}
+
+export default connect(mapStateToProps)(Home)

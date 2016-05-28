@@ -62,8 +62,6 @@ class AddArticle extends Component {
 }
 
 AddArticle.propTypes = {
-  /* articleTitle: PropTypes.string.isRequired,
-     articleContent: PropTypes.string.isRequired, */
   articleTitle: PropTypes.string,
   articleContent: PropTypes.string,
   authenticated: PropTypes.bool.isRequired,

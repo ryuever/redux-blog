@@ -4,6 +4,7 @@ import {connect} from 'react-redux';
 import classNames from 'classnames'
 
 import {manualLogin} from '../actions/user';
+// require('flex-react-modal/dist/style.css');
 
 const ENTER_KEY_CODE = 13;
 
@@ -12,6 +13,7 @@ class Login extends Component {
     super(props);
     this._onLoginSubmit = this._onLoginSubmit.bind(this);
     this.onKeyDown = this.onKeyDown.bind(this);
+    this.handleSuccess = this.handleSuccess.bind(this);
   }
 
   _onLoginSubmit(){
@@ -32,12 +34,19 @@ class Login extends Component {
     }
   }
 
+  handleSuccess() {
+    let router = this.context.router;
+
+    router.replace({
+      pathname: "/articles"
+    })
+  }
+
   render(){
     const {authenticated, isWaiting} = this.props.user;
     if (authenticated){
-      return (
-        <h1> You are logged </h1>
-      )
+      this.handleSuccess();
+      return null;
     }
 
     return(
@@ -63,6 +72,10 @@ Login.propTypes = {
   user: PropTypes.object,
   dispatch: PropTypes.func
 }
+
+Login.contextTypes = {
+    router: PropTypes.func.isRequired
+};
 
 function mapStateToProps(state){
   return {

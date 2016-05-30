@@ -78,12 +78,6 @@
 }
 
 
-
-
-
-
-
-
 //---------------- for article page --------------------//
 .rb-article-main{
     margin-left: auto;
@@ -103,13 +97,19 @@
 
 // add artile title input
 .rb-article-title-input {
-    position: fixed;
-    width: 40%;
-    top: 48px;
     font-size: @font-size-base;
     padding: @padding-base-vertical @padding-base-horizontal;
+    padding-left: 0px;
     border: 1px solid @input-border;
     border-radius: @input-border-radius;
+    box-sizing: border-box;
+    position: fixed;
+    width: 770px;
+    border: none;
+
+    &:focus {
+        outline: none;
+    }
 }
 
 .rb-post-article{

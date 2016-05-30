@@ -46,16 +46,13 @@ class AddArticle extends Component {
   render(){
 
     return(
-      <div className="_rb-add-article">
+      <div className="rb-add-article">
         <div className="article-title">
           <ArticleTitleInput newTitle={this.props.articleTitle}
            onTitleChange={this.onTitleChange} />
         </div>
         <RichEditor
          onContentChange={this.onContentChange}/>
-        <ArticleSubmit
-         onSubmit={this.onEntrySave}/>
-        <ArticleTagContainer />
       </div>
     )
   }

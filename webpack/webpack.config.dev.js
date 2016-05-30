@@ -90,28 +90,29 @@ module.exports = [
       extensions: ['', '.js', '.jsx', '.css', '.less']
     },
     plugins: [
-        // extract inline css from modules into separate files
+      // extract inline css from modules into separate files
       // new ExtractTextPlugin("styles/main.css"),
       // new webpack.optimize.CommonsChunkPlugin("vendor", "vendor.bundle.js"),
       new webpack.optimize.CommonsChunkPlugin('vendor', 'vendor.bundle.js', Infinity),
       new ExtractTextPlugin("[name].css"),
-        new webpack.optimize.UglifyJsPlugin({
-          compressor: {
-            warnings: false
-          }
-        }),
-        new webpack.DefinePlugin({
-          __DEVCLIENT__: false,
-          __DEVSERVER__: false,
-          __DEV__: true
-        })
+      new webpack.optimize.UglifyJsPlugin({
+        compressor: {
+          warnings: false
+        }
+      }),
+      new webpack.DefinePlugin({
+        __DEVCLIENT__: false,
+        __DEVSERVER__: false,
+        __DEV__: true
+      })
     ]
   }, {
     // The configuration for the server-side rendering
     name: "server-side rendering",
     context: path.join(__dirname, "..", "app"),
     entry: {
-      server: "./server"
+      server: "./server",
+      style: './stylesheets/rb-main'
     },
     target: "node",
     output: {
@@ -131,21 +132,22 @@ module.exports = [
       extensions: ['', '.js', '.jsx', '.css', '.less']
     },
     plugins: [
-        // Order the modules and chunks by occurrence.
-        // This saves space, because often referenced modules
-        // and chunks get smaller ids.
+      // Order the modules and chunks by occurrence.
+      // This saves space, because often referenced modules
+      // and chunks get smaller ids.
       new webpack.optimize.OccurenceOrderPlugin(),
-        // new ExtractTextPlugin("styles/main.css"),
-        new webpack.optimize.UglifyJsPlugin({
-          compressor: {
-            warnings: false
-          }
-        }),
-        new webpack.DefinePlugin({
-          __DEVCLIENT__: false,
-          __DEVSERVER__: false,
-          __DEV__: true
-        })
+      // new ExtractTextPlugin("styles/main.css"),
+      new ExtractTextPlugin("[name].css"),
+      new webpack.optimize.UglifyJsPlugin({
+        compressor: {
+          warnings: false
+        }
+      }),
+      new webpack.DefinePlugin({
+        __DEVCLIENT__: false,
+        __DEVSERVER__: false,
+        __DEV__: true
+      })
     ],
   }
 ];

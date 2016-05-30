@@ -16,8 +16,9 @@ class ArticleTitleInput extends Component{
   render(){
     return(
       <input
-       className="_rb-article-title-input"
+       className="rb-article-title-input"
        type="text"
+       placeholder="Please input an article title"
        value={this.props.newTitle}
        onChange={this.onTitleChange}
        />

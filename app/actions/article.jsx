@@ -79,7 +79,6 @@ export function getArticles(){
                  return res.json();
                })
                .then((articles) => {
-                 console.log('articles : ', articles);
                  dispatch({
                    type: types.GET_ARTICLES_REQUEST,
                    articles: articles

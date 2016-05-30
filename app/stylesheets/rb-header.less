@@ -1,0 +1,51 @@
+.rb-header{
+    position: fixed;
+    height: 50px;
+    width: 100%;
+    top: 0px;
+    left: 0px;
+    background: white;
+    z-index: 1;
+    border-bottom: 1px solid #eee;
+
+    .rb-actions{
+        float: right;
+        margin-right: 20px;
+        top: 50%;
+        margin-top: -17.5px;
+        position: relative;
+
+        .rb-action-item {
+            display: inline-block;
+            border: 1px solid transparent;
+            margin-right: 5px;
+        }
+
+        .rb-action {
+            margin-right: 10px;
+            margin-left: 10px;
+        }
+
+        a {
+            text-decoration: none;
+        }
+        span.post-article {
+            font-size: 16px;
+            margin-right: 10px;
+            color: #116D49;
+            vertical-align: middle;
+        }
+        input{
+            width: 250px;
+            height: 35px;
+            box-sizing: border-box;
+            font-size: @font-size-nm;
+            line-height:15px;
+            padding: 6px;
+            border-radius: 3px;
+            &:focus {
+                outline: none;
+            }
+        }
+    }
+}

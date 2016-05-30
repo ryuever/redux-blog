@@ -66,7 +66,7 @@ export function manualLogin(data) {
                  return res.json();
                })
                .then((account) => {
-                 return dispatch(loginSuccess(account));
+                 dispatch(loginSuccess(account));
                });
   };
 }

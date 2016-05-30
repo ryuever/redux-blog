@@ -5,9 +5,7 @@ export default class ArticleListItemMeta extends Component {
 
   render(){
     return(
-      <div className="_rb-article-item-meta">
-        <span>{this.props.articleCreateDate}</span>
-        <span className="_rb-article-item-meta-link">continuted</span>
+      <div className="rb-article-item-meta">
       </div>
     )
   }

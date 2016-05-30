@@ -16,23 +16,26 @@ import Article from './containers/Article';
 import AddArticle from './containers/AddArticle';
 import ArticleLayout from './containers/ArticleLayout';
 
-export default (
-  <Route path="/">
-    <IndexRoute component={Home} />
-    <Route component={App}>
+export default (store) => {
+
+  return (
+    <Route path="/">
+      <IndexRoute component={Home}/>
       <Route component={Account}>
-        <Route path="signup" component={Signup} />
-        <Route path="login" component={Login} />
+        <Route path="/signup" component={Signup} />
+        <Route path="/login" component={Login} />
       </Route>
-      <Route path="logout" component={Logout} />
-      <Route path="about" component={About} />
-      <Route path="articles">
-        <IndexRoute component={ArticleList} />
-      </Route>
-      <Route path="article" component={ArticleLayout}>
-        <Route path="add" component={AddArticle} />
-        <Route path=":id" component={Article} />
+      <Route component={App}>
+        <Route path="logout" component={Logout} />
+        <Route path="about" component={About} />
+        <Route path="articles">
+          <IndexRoute component={ArticleList} />
+        </Route>
+        <Route path="article" component={ArticleLayout}>
+          <Route path="add" component={AddArticle} />
+          <Route path=":id" component={Article} />
+        </Route>
       </Route>
     </Route>
-  </Route>
-);
+  )
+}

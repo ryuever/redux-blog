@@ -1,4 +1,3 @@
-var _ = require('lodash');
 var Promise = require('bluebird');
 var config = require('config');
 
@@ -31,6 +30,7 @@ exports.postLogin = function(req, res, next){
 
 exports.postAutoLogin = function(req, res, next){
 
+  console.log('req cookie : ', req.cookies.uid);
   if(req.cookies.uid){
     console.log("req cookies uid : ", req.cookies.uid);
 
@@ -49,7 +49,7 @@ exports.postAutoLogin = function(req, res, next){
       })
   }else{
     console.log('auto login fail');
-    return res.status(200).send('{}');
+    return res.status(501).send('{status: "failed"}');
   }
 }
 

@@ -6,10 +6,10 @@
   "scripts": {
     "test": "NODE_ENV=test ./node_modules/.bin/mocha --timeout 2000 --require should --reporter spec server/test/main.js",
     "clean": "rimraf public/assets",
-    "start": "NODE_ENV=dev node server/index.js",
+    "start": "NODE_ENV=development node server/index.js",
     "pro": "NODE_ENV=production node server/index.js",
     "build:webpack:pro": "NODE_ENV=production webpack --config ./webpack/webpack.config.prod.js --progress --colors -p",
-    "build:webpack": "NODE_ENV=development webpack --config ./webpack/webpack.config.dev.js --progress --colors -p --watch --display-error-details --watch",
+    "build:webpack": "NODE_ENV=development webpack --config ./webpack/webpack.config.dev.js --progress --colors --watch --display-error-details --watch",
     "buildpro": "npm run clean && npm run build:webpack:pro",
     "build": "npm run clean && npm run build:webpack",
     "postinstall": "npm run build"
@@ -40,6 +40,7 @@
     "express-session": "^1.13.0",
     "extract-text-webpack-plugin": "^1.0.1",
     "file-loader": "^0.8.5",
+    "flex-react-modal": "^1.0.6",
     "graceful-logger": "^0.4.3",
     "isomorphic-fetch": "^2.2.1",
     "jade": "^1.11.0",

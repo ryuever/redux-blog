@@ -1,6 +1,6 @@
 var Comment = require("../models").Comment;
 
-var _ = require('lodash');
+var under = require('lodash');
 
 function createSlug(){
   return Math.random().toString(36).substr(2, 5);
@@ -23,7 +23,6 @@ exports.postComment = function(req, res, next){
   var full_slug = '';
   var $parentSlug = Promise.resolve();
 
-  console.log('parent_slug : ', parent_slug);
   if(parent_slug){
     $parentSlug = Comment.findOne({
       articleId: articleId,
@@ -32,7 +31,6 @@ exports.postComment = function(req, res, next){
   }
 
   $parentSlug.then(function(parent){
-    console.log('parent : ', parent);
     if(parent){
       slug = parent['slug'] + '/' + slug_part;
       full_slug = parent['full_slug'] + '/' + full_slug_part;
@@ -51,9 +49,7 @@ exports.postComment = function(req, res, next){
       full_slug: full_slug
     };
 
-    console.log('options : ', options);
-
-    const validOpt = _.pickBy(options, _.isundefined);
+    const validOpt = under.pickBy(options, under.isundefined);
     console.log('valid opt ', validOpt);
     var $comment = new Comment(validOpt);
     return $comment.save();
@@ -77,7 +73,6 @@ exports.postComment = function(req, res, next){
     return res.status(200).send(ret);
   }).catch(function(err){
     if(err){
-      console.log("save comment error : ", err);
       res.status(500).send('save comment err');
     }
   });
@@ -86,7 +81,6 @@ exports.postComment = function(req, res, next){
 
 exports.getComments = function(req, res, next){
   const {articleId}  = req.params;
-  console.log("articleId : ", articleId);
   var $comments = Comment.find({
     articleId: articleId
   }).exec();
@@ -112,7 +106,6 @@ exports.getComments = function(req, res, next){
     })
     .catch(function(err){
       if (err){
-        console.log('get comments error');
         res.status(500).send('get comments error');
       }
     });

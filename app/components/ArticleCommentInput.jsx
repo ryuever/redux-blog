@@ -18,15 +18,15 @@ export default class ArticleCommentInput extends Component {
 
   render(){
       return(
-        <fieldset className="_rb-comment-input-entry">
-          <input className="_rb-form-input"
+        <fieldset className="rb-comment-input-entry">
+          <input className="rb-form-input"
            ref="creatorName"
            placeholder="your name" />
           <textarea
-           className="_rb-form-textarea"
+           className="rb-form-textarea"
            ref="comment"/>
           <button
-           className="_rb-btn form"
+           className="rb-btn form"
            type="submit"
            onClick={this.onSubmit}> Submit a comment</button>
         </fieldset>

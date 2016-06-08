@@ -6,7 +6,7 @@ class ArticleCommentListItemTop extends Component {
     const {creatorName, createDate} = this.props;
 
     return(
-      <div className="_rb-comment-list-item-top">
+      <div className="rb-comment-list-item-top">
         <a role="button" className="">{creatorName}</a>
         <span>{createDate}</span>
       </div>

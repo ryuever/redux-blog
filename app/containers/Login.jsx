@@ -51,18 +51,18 @@ class Login extends Component {
 
     return(
         <fieldset>
-          <input className="_rb-form-input center"
+          <input className="rb-form-input center"
            type="email"
            ref="email"
            placeholder="email" />
-          <input className="_rb-form-input center"
+          <input className="rb-form-input center"
            onKeyDown={this.onKeyDown}
            type="password"
            ref="password"
            placeholder="password" />
           <button
            onClick={this._onLoginSubmit}
-           className="center _rb-btn">Login</button>
+           className="center rb-btn">Login</button>
         </fieldset>
     )
   }

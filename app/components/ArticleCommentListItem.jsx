@@ -110,7 +110,7 @@ export default class ArticleCommentListItem extends Component{
         });
 
         commentBody = React.createElement('div', {
-          className: '_rb-comment-body'
+          className: 'rb-comment-body'
         }, commentTop, [slug_to_data[key].content, commentFooter])
 
 
@@ -121,7 +121,7 @@ export default class ArticleCommentListItem extends Component{
             slug: slug_to_data[key].slug});
 
           commentBody = React.createElement('div', {
-            className: '_rb-comment-body'
+            className: 'rb-comment-body'
           }, commentTop, [slug_to_data[key].content, commentFooter, cr])
 
         }
@@ -129,7 +129,7 @@ export default class ArticleCommentListItem extends Component{
         commentChild = [userAvatar, commentBody, nested_child]
 
         child = React.createElement('div', {
-          className: classNames('_rb-comment-'+depth, '_rb-comment-item'),
+          className: classNames('rb-comment-'+depth, 'rb-comment-item'),
           key: slug_to_data[key]._id    // not work for 'should have a unique "key" prop.'
         }, commentChild);
 

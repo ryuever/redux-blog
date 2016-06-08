@@ -11,7 +11,6 @@ var RoutingContext = Router.RouterContext;
 // var routes = require('../../app/routes.jsx');
 
 var App = require('../../public/assets/server');
-console.log("APp : ", App);
 var apis = require('../routes/api');
 
 module.exports = function(app){

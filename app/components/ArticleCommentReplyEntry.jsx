@@ -31,7 +31,7 @@ class ArticleCommentReplyEntry extends Component{
 
   render(){
     return(
-      <div className="_rb-comment-reply" >
+      <div className="rb-comment-reply" >
         <textarea
          placeholder="Input your comment"
          ref="reply"/>
@@ -42,7 +42,7 @@ class ArticleCommentReplyEntry extends Component{
         </div>
         <div>
           <button
-           className="_rb-comment-reply-btn _rb-btn"
+           className="rb-comment-reply-btn rb-btn"
            onClick={this.onSubmit}
            >
             Submit

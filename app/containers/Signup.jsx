@@ -32,16 +32,16 @@ class Signup extends Component {
 
     return(
       <fieldset>
-        <input className="_rb-form-input center"
+        <input className="rb-form-input center"
          type="email"
          ref="email"
          placeholder="email" />
-        <input className="_rb-form-input center"
+        <input className="rb-form-input center"
          type="password"
          ref="password"
          placeholder="password" />
         <button
-         onClick={this._onSignupSubmit} className="center _rb-btn">Signup</button>
+         onClick={this._onSignupSubmit} className="center rb-btn">Signup</button>
       </fieldset>
     )
   }

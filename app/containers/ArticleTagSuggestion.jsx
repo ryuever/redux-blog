@@ -8,7 +8,7 @@ class ArticleTagSuggestion extends Component{
     const {suggestions} = this.props;
 
     return(
-      <div className="_rb-tags">
+      <div className="rb-tags">
         {suggestions.map(function(item){
           return(
             <Link to="" key={item._id}>{item.name}</Link>

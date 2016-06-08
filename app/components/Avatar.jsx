@@ -4,7 +4,7 @@ class Avatar extends Component{
 
   render(){
     return(
-      <div className="_rb-avatar">
+      <div className="rb-avatar">
         <a >
           <img src="/pp.jpg" alt="头像" />
         </a>

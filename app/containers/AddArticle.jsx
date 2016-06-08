@@ -11,7 +11,8 @@ import ArticleTagContainer from './ArticleTagContainer'
 import { browserHistory } from 'react-router'
 
 import {
-  createArticle, titleTyping, contentTyping
+  titleTyping,
+  contentTyping
 } from '../actions/article';
 
 import {createArticleMeta} from '../actions/articleMeta'
@@ -21,7 +22,6 @@ class AddArticle extends Component {
     super(props);
     this.onTitleChange = this.onTitleChange.bind(this);
     this.onContentChange = this.onContentChange.bind(this);
-    this.onEntrySave = this.onEntrySave.bind(this);
 
     const {authenticated} = this.props
     if (!authenticated)
@@ -38,13 +38,7 @@ class AddArticle extends Component {
     dispatch(contentTyping(text));
   }
 
-  onEntrySave(text){
-    const {dispatch} = this.props
-    dispatch(createArticle());
-  }
-
   render(){
-
     return(
       <div className="rb-add-article">
         <div className="article-title">

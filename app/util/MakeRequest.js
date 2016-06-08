@@ -23,8 +23,6 @@ class MakeRequest{
 
     url = `http://localhost:5000${ApiEndPoint}${path}${queryString}`;
 
-    console.log(' send ulr : ', url, fetch, method);
-
     return fetch(url, {
       method: method,
       credentials: 'include',

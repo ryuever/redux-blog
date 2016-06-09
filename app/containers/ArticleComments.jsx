@@ -26,7 +26,7 @@ class ArticleComments extends Component{
 
     if (commentList){
       return(
-        <secion className="_rb-comment-list">
+        <secion className="rb-comment-list">
           <ArticleCommentListItem
            commentList ={commentList}
            onSubmitCommentReply={this.onSubmitCommentReply}

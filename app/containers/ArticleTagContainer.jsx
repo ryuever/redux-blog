@@ -7,7 +7,7 @@ class ArticleTagContainer extends Component{
 
   render(){
     return(
-      <div className="_rb-add-article-tags-container">
+      <div className="rb-add-article-tags-container">
         <ReactTagSuggestion />
         <ReactTag />
       </div>

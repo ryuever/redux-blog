@@ -1,16 +1,21 @@
-._rb-btn {
+.rb-btn {
     text-align: center;
-    verticle-align: middle;
     cursor: pointer;
-    border: 1px solid #181313;
-    font-size: @font-size-base;
-    border-radius: @border-radius-base;
-    background-color: @btn-light-color;
-    padding: @padding-base-vertical, @padding-base-horizontal;
+    border: 1px solid #eee;
+    border-radius: 4px;
+    background-color: #fff;
+    padding: 3px 6px;
     min-width: 55px;
+    box-sizing: border-box;
+    font-size: 12px;
+    color: #676762;
 
     // 如果说是form下的button，也就是用来提交的话有margin
     &.form {
-        margin: 5px;
+        margin: 5px 5px 5px 0px;
+    }
+
+    &:hover {
+        background: #eee;
     }
 }

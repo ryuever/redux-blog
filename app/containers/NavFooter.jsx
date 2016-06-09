@@ -49,7 +49,7 @@ class NavFooter extends Component{
 
   render(){
     return(
-      <dir className="_rb-system-action">
+      <dir className="rb-system-action">
         <span className="glyphicon glyphicon-list" />
         {this.RenderAuth()}
         <span className="glyphicon glyphicon-cog" />

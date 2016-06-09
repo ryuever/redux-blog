@@ -13,16 +13,14 @@ class ArticleCommentListItemFooter extends Component{
 
   render(){
     return(
-      <div className="_rb-comment-list-item-footer">
+      <div className="rb-comment-list-item-footer">
         <a
          role="button"
          className="span"
          onClick={this.onClickReply}>回复</a>
       </div>
     )
-
   }
-
 }
 
 export default ArticleCommentListItemFooter

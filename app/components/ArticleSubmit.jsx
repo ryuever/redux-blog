@@ -5,11 +5,11 @@ class ArticleSubmit extends Component{
 
   render(){
     return(
-      <div className="_rb-post-article">
+      <div className="rb-post-article">
         <button
          type="submit"
          onClick={this.props.onSubmit}
-         className="_rb-btn"
+         className="rb-btn"
          >Post an article</button>
       </div>
     )

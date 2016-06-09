@@ -20,7 +20,7 @@ var RenderUser = React.createClass({
     }
 
     return(
-      <div className="_rb-user-container">
+      <div className="rb-user-container">
         <Avatar />
         <span>{userName}</span>
         <span className="caret"></span>
@@ -45,7 +45,7 @@ var RenderNavItem = React.createClass({
     const {toLink, value, id, selected} = this.props;
     var classname = classNames({
       "selected": id===selected,
-      "_rb-nav-bar-item": true
+      "rb-nav-bar-item": true
     })
 
     return(
@@ -56,7 +56,7 @@ var RenderNavItem = React.createClass({
        >
         <Link
          to={toLink}
-         className="_rb-nav-link-name"
+         className="rb-nav-link-name"
          >{value}</Link>
       </li>
     )
@@ -102,7 +102,7 @@ class Navigation extends Component {
          authenticated={this.props.authenticated}
          account={this.props.account}
         />
-        <ul className='_rb-nav-list'>
+        <ul className='rb-nav-list'>
           {nav_item.map(function(item, i){
             return(
               <RenderNavItem

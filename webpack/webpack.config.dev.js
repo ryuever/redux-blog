@@ -111,8 +111,7 @@ module.exports = [
     name: "server-side rendering",
     context: path.join(__dirname, "..", "app"),
     entry: {
-      server: "./server",
-      style: './stylesheets/rb-main'
+      server: "./server"
     },
     target: "node",
     output: {

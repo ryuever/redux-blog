@@ -1,47 +1,58 @@
 // 整个comment input跟上面的comments list要有一个线隔开
-._rb-comment-input-entry,
-._rb-comment-list{
+.rb-comment-input-entry,
+.rb-comment-list{
     border: none;
     padding-top: 20px;
     margin-top: 20px;
+    padding-left: 0px;
 }
 
-._rb-comment-item {
-    // border: 1px solid @lighter-grey;
+.rb-comment-item {
     border-left: 1px dashed @lighter-grey;
-    // margin-bottom: 5px;
-    // border-radius: 4px;
+    box-shadow: 0 1px 4px rgba(0,0,0,.04);
+    padding: 10px;
+    border: 1px solid #eee;
+    border-radius: 3px;
+    margin-top: 5px;
 }
 
-._rb-comment-body{
-    margin-left: 45px;
-    // width: 60%;
-    // float: left;
-    // position: relative;
+.rb-comment-body{
+    margin-left: 20px;
     width: 90%;
+    padding-bottom: 5px;
+    padding-left: 5px;
 }
 
-._rb-comment-0 {
+.rb-comment-content {
+    font-size: 12px;
+    font-family: @font-family;
+}
 
-    ._rb-comment-1 {
+.rb-comment-0 {
+    margin-bottom: 20px;
+
+    .rb-comment-1 {
         margin-left: 20px;
     }
 
-    ._rb-comment-2 {
+    .rb-comment-2 {
         margin-left: 30px;
+        margin-top: 5px;
     }
 
-    ._rb-comment-3 {
+    .rb-comment-3 {
         margin-left: 40px;
+        margin-top: 5px;
     }
-    ._rb-comment-4 {
+    .rb-comment-4 {
         margin-left: 50px;
+        margin-top: 5px;
     }
 }
 
-
-._rb-comment-list-item-top {
+.rb-comment-list-item-top {
     font-size: 10px;
+    height: 20px;
     span {
         margin-left: 10px;
         color: @lighter-grey;
@@ -53,38 +64,38 @@
     }
 }
 
+.rb-comment-reply {
+    textarea:focus,
+    input:focus{
+        outline: none;
+    }
 
-._rb-comment-reply {
     textarea{
         width: 100%;
         height: 100px;
         margin: 3px;
         border-radius: 4px;
+        border: 1px solid #B9B4B4
     }
 
     div {
-        height: 40px;
+        height: 32px;
         input {
             width: 40%;
-            height: 80%;
+            height: 25px;
+            font-size: 10px;
+            line-height: 17px;
+            padding: 4px 6px;
             border-radius: 4px;
             float: right;
+            border: 1px solid #eee;
+            box-sizing: border-box;
+            color: #797474;
+            font-family: @font-family;
         }
-    }
 
-    div {
-        height: 40px;
         button {
             float: right;
         }
     }
-
 }
-// ._rb-comment-list-item-footer {
-//     margin: 5px;
-//     span {
-//         margin-right: 10px;
-//         font-size: 12px;
-//         color: #999999
-//     }
-// }

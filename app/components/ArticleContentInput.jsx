@@ -1,7 +1,7 @@
 import React from 'react';
 
 import {Editor, EditorState, RichUtils, convertToRaw} from  'draft-js'
-import buildMarkup from 'backdraft-js'
+// import buildMarkup from 'backdraft-js'
 import buildMarkdown from './draft-conversion'
 
 export default class RichEditor extends React.Component {
@@ -16,13 +16,14 @@ export default class RichEditor extends React.Component {
       var contentState = editorState.getCurrentContent();
 
       var rawDraftContentBlock = convertToRaw(contentState);
-      /* var markup = {
-         'BOLD': ['<strong>', '</strong>'],
-         'ITALIC': ['<em>', '</em>']
-         }; */
+
+      // 如果确实提供的话，当我们对一个block进行修饰的时候回报错。
+      // 这个主要是用来进行替换draft.js中的关键字，为可以被认识的html标签
       var markup = {
         'BOLD': ['<strong>', '</strong>'],
-        'ITALIC': ['<em>', '</em>']
+        'ITALIC': ['<em>', '</em>'],
+        'UNDERLINE': ['<span style="text-decoration:underline;">', '</span>'],
+        'CODE': ['<code>', '</code>']
       }
 
       var blockTag = {
@@ -31,7 +32,6 @@ export default class RichEditor extends React.Component {
         'header-two': ['<h2>', '</h2>']
       }
 
-      // var markedUpBlocks = buildMarkup(rawDraftContentBlock, markup);
       var markedUpBlocks = buildMarkdown(rawDraftContentBlock, markup, blockTag);
       onContentChange(markedUpBlocks);
     }
@@ -105,7 +105,7 @@ export default class RichEditor extends React.Component {
            editorState={editorState}
            handleKeyCommand={this.handleKeyCommand}
            onChange={this.onChange}
-           placeholder="Tell a story..."
+           placeholder=""
            ref="editor"
            spellCheck={true}
           />
@@ -142,14 +142,46 @@ class StyleButton extends React.Component {
   }
 
   render() {
-    let className = 'RichEditor-styleButton';
+    const { style } = this.props;
+
+    let classMap = {
+      'header-one': "fa fa-header",
+      'header-two': "fa fa-header",
+      'blockquote': "fa fa-quote-left",
+      'unordered-list-item': "fa fa-list-ul",
+      'ordered-list-item': "fa fa-list-ol",
+      'code-block': "fa fa-code",
+      'BOLD': 'fa fa-bold',
+      'ITALIC': 'fa fa-italic',
+      'UNDERLINE': 'fa fa-underline',
+      'CODE': 'fa fa-coffee'
+    }
+
+    let className = `RichEditor-styleButton ${style} sr-only`;
     if (this.props.active) {
       className += ' RichEditor-activeButton';
     }
 
+    let decorator = (style) => {
+      switch (style) {
+        case 'header-one':
+          return 1
+        case 'header-two':
+          return 2
+        default:
+          return ''
+      }
+    }
+
     return (
-      <span className={className} onMouseDown={this.onToggle}>
-        {this.props.label}
+      <span onMouseDown={this.onToggle} className="editor-icon">
+        <i className={classMap[style]} aria-hidden="true"></i>
+        <span className={className} onMouseDown={this.onToggle}>
+          {this.props.label}
+        </span>
+        <span className="decorator">
+          {decorator(style)}
+        </span>
       </span>
     );
   }

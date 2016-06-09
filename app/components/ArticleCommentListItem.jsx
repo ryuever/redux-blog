@@ -98,7 +98,6 @@ export default class ArticleCommentListItem extends Component{
 
         var userAvatar = React.createElement(Avatar);
 
-
         var commentTop = React.createElement(ArticleCommentListItemTop, {
           creatorName: slug_to_data[key].creatorName,
           createDate: slug_to_data[key].createDate
@@ -109,9 +108,13 @@ export default class ArticleCommentListItem extends Component{
           slug: slug_to_data[key].slug
         });
 
+        var commentContent = React.createElement('span', {
+          className: 'rb-comment-content'
+        }, slug_to_data[key].content)
+
         commentBody = React.createElement('div', {
           className: 'rb-comment-body'
-        }, commentTop, [slug_to_data[key].content, commentFooter])
+        }, [commentTop, commentContent, commentFooter])
 
 
         if(clickReply && slug === slug_to_data[key].slug){
@@ -122,7 +125,7 @@ export default class ArticleCommentListItem extends Component{
 
           commentBody = React.createElement('div', {
             className: 'rb-comment-body'
-          }, commentTop, [slug_to_data[key].content, commentFooter, cr])
+          }, [commentTop, commentContent, commentFooter, cr])
 
         }
 

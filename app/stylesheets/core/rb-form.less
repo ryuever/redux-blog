@@ -1,25 +1,38 @@
 .rb-form-input {
     display: block;
-    width: 300px;
-    font-size: @font-size-base;
+    font-size: @font-size-nm;
     padding: @padding-base-vertical @padding-base-horizontal;
     border: 1px solid @input-border;
     border-radius: @input-border-radius;
+    color: #6F6D6D;
+    font-family: @font-family;
+
+    &:focus {
+        outline: none;
+    }
 }
 
 fieldset .rb-form-input{
     margin-bottom: 5px;
 }
 
-
 .rb-comment-input-entry .rb-form-input{
     width: 500px;
+    box-sizing: border-box;
 }
 .rb-form-textarea {
     display: block;
     width: 500px;
-    font: @font-size-base;
+    font-size: @font-size-nm;
+    font-family: @font-family;
     border: 1px solid @input-border;
     border-radius: @input-border-radius;
     height: 100px;
+    box-sizing: border-box;
+    color: #6F6D6D;
+    padding: 6px;
+
+    &:focus {
+        outline: none;
+    }
 }

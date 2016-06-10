@@ -6,6 +6,7 @@ var articles = require('../controllers/article');
 var comments = require('../controllers/comment');
 var articleMetas = require('../controllers/article-meta');
 var tags = require('../controllers/tag');
+var attachments = require('../controllers/attachments');
 
 // user authentication
 router.post('/login', users.postLogin);
@@ -26,4 +27,8 @@ router.put('/articlemeta/:articleId', articleMetas.updateArticleMeta);
 
 router.post('/tag', tags.createTag);
 router.get('/tags', tags.getTags);
+
+router.post('/upload', attachments.upload);
+router.get('/download/:id', attachments.getFileById);
+
 module.exports = router;

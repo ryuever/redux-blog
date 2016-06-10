@@ -3,7 +3,10 @@ import { connect } from 'react-redux';
 import { Link } from 'react-router';
 
 import FlexReactModal from 'flex-react-modal';
-import { manualLogin } from '../actions/user';
+import {
+  manualLogin,
+  signUp
+} from '../actions/user';
 
 class Home extends Component{
 
@@ -75,7 +78,14 @@ class Home extends Component{
   }
 
   onRegisterClick(data) {
-    console.log('click register : ', data);
+    const { dispatch } = this.props;
+
+    let signUpData = {
+      email: data.register_name,
+      password: data.register_password
+    }
+
+    dispatch(signUp(signUpData));
   }
 
   handleSuccess() {

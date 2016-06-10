@@ -49,12 +49,10 @@ function buildMarkdown(rawJSData, innerHTMLTags, blockHTMLTags){
 
     var styleRanges = block.inlineStyleRanges;
 
-    console.log('block : ', block.type, block);
-
     if (blockHTMLTags[block.type]) {
       outputBlock.push(blockHTMLTags[block.type][0]);
     } else if (block.type === 'image') {
-      outputBlock.push('<img src="')
+      outputBlock.push('<img style= "max-width: 500px; max-height: 680px;" src="')
     } else {
       outputBlock.push("<p>");
     }

@@ -1,87 +1,154 @@
-var path = require('path');
-var webpack = require('webpack');
+var path = require("path");
 var ExtractTextPlugin = require("extract-text-webpack-plugin");
-var jquery = require('jquery');
+var webpack = require("webpack");
 
-// var webpack_config = require("webpack_config");
+var assetsPath = path.join(__dirname, "..", "public", "assets");
+var publicPath = "/assets/";
 
-var config = require('config');
-
-var hotMiddlewareScript = 'webpack-hot-middleware/client?path=/__webpack_hmr&timeout=20000&reload=true';
-var assetsPath = path.join(__dirname, '..', 'public', 'assets');
-
-var webpack_config = {
-  // devtool: "cheap-module-source-map",
-  // context: path.join(__dirname, '../app'),
-  entry:{
-    app: path.join(__dirname, '..', 'app', 'client'),
-    vendor: path.join(__dirname, '..', 'app', 'vendor'),
-    style: path.join(__dirname, '..', 'app', 'stylesheets/rb-main')
+var commonLoaders = [
+  {
+    /*
+     * TC39 categorises proposals for babel in 4 stages
+     * Read more http://babeljs.io/docs/usage/experimental/
+     */
+    test: /\.js$|\.jsx$/,
+    loader: 'babel-loader',
+    // Reason why we put this here instead of babelrc
+    // https://github.com/gaearon/react-transform-hmr/issues/5#issuecomment-142313637
+    /* query: {
+       "presets": ["es2015", "react", "stage-0"],
+       "plugins": [
+       "transform-decorators-legacy",
+       "transform-react-remove-prop-types",
+       "transform-react-constant-elements",
+       "transform-react-inline-elements"
+       ]
+       }, */
+    include: path.join(__dirname, '..', 'app'),
+    exclude: path.join(__dirname, '..', 'node_modules')
   },
-  output: {
-    path: assetsPath,
-    filename: '[name].js',
-    publicPath: '/assets/'
-  },
-  plugins: [
-    new webpack.optimize.OccurenceOrderPlugin(),
-    new webpack.HotModuleReplacementPlugin(),
-    new webpack.NoErrorsPlugin(),
-    // new webpack.DefinePlugin({
-    //   __TEST__: JSON.stringify(JSON.parse(process.env.TEST_ENV || 'false')),
-    //   __DEV__: true
-    // }),
-
-    new webpack.DefinePlugin({
-      'process.env.NODE_ENV': '"production"',
-      __DEV__: false
-    }),
-    new webpack.optimize.UglifyJsPlugin({
-      compress: {
-        warnings: false
-      }
-    }),
-    // new webpack.DefinePlugin({
-    //   'process.env': {
-    //     'NODE_ENV': JSON.stringify('production')
-    //   }
-    // }),
-    new webpack.optimize.CommonsChunkPlugin("vendor", "vendor.bundle.js"),
-    new ExtractTextPlugin("[name].css")
-    //
-  ],
-  module:{
-    loaders: [
-      {
-        test: /\.js$|\.jsx$/,
-        loader: 'babel',
-        // include: path.resolve(__dirname, '..')
-        exclude: path.resolve(__dirname, '..', "node_modules")
-      },{
-        test: /\.less$/,
-        loader: ExtractTextPlugin.extract("style-loader", "css-loader!less-loader")
-      },
-      { test: /\.(png|woff|woff2|eot|ttf|svg)$/, loader: 'url-loader?limit=100000' },
-      {test: /\.json$/, loader: "json-loader"}
-    ]
-  },
-  resolve: {
-    extensions: ['', '.js', '.jsx', '.scss', '.less'],
-    // alias: {
-    //   // webpack_config: path.join(__dirname, 'config', process.env.NODE_ENV)
-    //   config: path.join(__dirname, 'config', process.env.NODE_ENV),
-    //   pp: path.join(__dirname, '..', 'app', 'components', 'ArticleCommentListItemFooter')
-    // },
-    // root: path.resolve(__dirname, '..', 'app'),
-    root: path.join(__dirname, '..', 'app')
-    // modulesDirectories: [
-    //   'node_modules', 'app'
-    // ]
+  { test: /\.json$/, loader: "json-loader" },
+  { test: /\.(png|woff|woff2|eot|ttf|svg)$/, loader: 'url-loader?limit=100000' },
+  /* {
+     test: /\.(png|jpg|jpeg|gif|svg|woff|woff2)$/,
+     loader: 'url-loader',
+     query: {
+     name: '[hash].[ext]',
+     limit: 10000,
+     }
+     }, */
+  { test: /\.css|\.less$/,
+    loader: ExtractTextPlugin.extract("style-loader", "css-loader!less-loader")
   }
-}
+];
 
-var bower_dir = __dirname + '/bower_components';
+module.exports = [
+  {
+    // The configuration for the client
+    name: "browser",
+    /* The entry point of the bundle
+     * Entry points for multi page app could be more complex
+     * A good example of entry points would be:
+     * entry: {
+     *   pageA: "./pageA",
+     *   pageB: "./pageB",
+     *   pageC: "./pageC",
+     *   adminPageA: "./adminPageA",
+     *   adminPageB: "./adminPageB",
+     *   adminPageC: "./adminPageC"
+     * }
+     *
+     * We can then proceed to optimize what are the common chunks
+     * plugins: [
+     *  new CommonsChunkPlugin("admin-commons.js", ["adminPageA", "adminPageB"]),
+     *  new CommonsChunkPlugin("common.js", ["pageA", "pageB", "admin-commons.js"], 2),
+     *  new CommonsChunkPlugin("c-commons.js", ["pageC", "adminPageC"]);
+     * ]
+     */
+    // A SourceMap is emitted.
+    // devtool: "source-map",
+    context: path.join(__dirname, "..", "app"),
+    entry: {
+      app: "./client",
+      vendor: './vendor',
+      style: './stylesheets/rb-main'
+    },
+    output: {
+      // The output directory as absolute path
+      path: assetsPath,
+      // The filename of the entry chunk as relative path inside the output.path directory
+      filename: "[name].js",
+      // The output path from the view of the Javascript
+      publicPath: publicPath
 
-// config.addVendor('react', bower_dir + '/simplemde/dist/simplemde.min.js');
-
-module.exports = webpack_config;
+    },
+    module: {
+      loaders: commonLoaders
+    },
+    resolve: {
+      root: [path.join(__dirname, '..', 'app')],
+      extensions: ['', '.js', '.jsx', '.css', '.less']
+    },
+    plugins: [
+      // extract inline css from modules into separate files
+      // new ExtractTextPlugin("styles/main.css"),
+      // new webpack.optimize.CommonsChunkPlugin("vendor", "vendor.bundle.js"),
+      new webpack.optimize.CommonsChunkPlugin('vendor', 'vendor.bundle.js', Infinity),
+      new ExtractTextPlugin("[name].css"),
+      new webpack.optimize.UglifyJsPlugin({
+        sourceMap: false,
+        compress: {
+          warnings: false
+        }
+      }),
+      new webpack.DefinePlugin({
+        __DEVCLIENT__: false,
+        __DEVSERVER__: false,
+        __DEV__: true
+      })
+    ]
+  }, {
+    // The configuration for the server-side rendering
+    name: "server-side rendering",
+    context: path.join(__dirname, "..", "app"),
+    entry: {
+      server: "./server"
+    },
+    target: "node",
+    output: {
+      // The output directory as absolute path
+      path: assetsPath,
+      // The filename of the entry chunk as relative path inside the output.path directory
+      filename: "server.js",
+      // The output path from the view of the Javascript
+      publicPath: publicPath,
+      libraryTarget: "commonjs2"
+    },
+    module: {
+      loaders: commonLoaders
+    },
+    resolve: {
+      root: [path.join(__dirname, '..', 'app')],
+      extensions: ['', '.js', '.jsx', '.css', '.less']
+    },
+    plugins: [
+      // Order the modules and chunks by occurrence.
+      // This saves space, because often referenced modules
+      // and chunks get smaller ids.
+      new webpack.optimize.OccurenceOrderPlugin(),
+      // new ExtractTextPlugin("styles/main.css"),
+      new ExtractTextPlugin("[name].css"),
+      new webpack.optimize.UglifyJsPlugin({
+        sourceMap: false,
+        compress: {
+          warnings: false
+        }
+      }),
+      new webpack.DefinePlugin({
+        __DEVCLIENT__: false,
+        __DEVSERVER__: false,
+        __DEV__: true
+      })
+    ],
+  }
+];

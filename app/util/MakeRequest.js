@@ -21,7 +21,7 @@ class MakeRequest{
       queryString = `?${Helper.concatQueryString(query)}`;
     }
 
-    url = `http://localhost:5000${ApiEndPoint}${path}${queryString}`;
+    url = `${ApiEndPoint}${path}${queryString}`;
 
     return fetch(url, {
       method: method,

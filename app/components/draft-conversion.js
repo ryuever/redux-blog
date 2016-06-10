@@ -49,10 +49,15 @@ function buildMarkdown(rawJSData, innerHTMLTags, blockHTMLTags){
 
     var styleRanges = block.inlineStyleRanges;
 
-    if (blockHTMLTags[block.type])
+    console.log('block : ', block.type, block);
+
+    if (blockHTMLTags[block.type]) {
       outputBlock.push(blockHTMLTags[block.type][0]);
-    else
+    } else if (block.type === 'image') {
+      outputBlock.push('<img src="')
+    } else {
       outputBlock.push("<p>");
+    }
 
     var styleRangesPosition = styleRanges.map(function(styleRange){
       return ({
@@ -122,10 +127,13 @@ function buildMarkdown(rawJSData, innerHTMLTags, blockHTMLTags){
     // console.log('tmp after right : ', tmp);
 
     // finally
-    if (blockHTMLTags[block.type])
+    if (blockHTMLTags[block.type]) {
       outputBlock.push(blockHTMLTags[block.type][1]);
-    else
+    } else if (block.type ==='image') {
+      outputBlock.push('">');
+    } else {
       outputBlock.push("</p>");
+    }
     return outputBlock.join('');
   });
 

@@ -33,7 +33,7 @@ class Article extends Component {
           <span>浏览{this.props.viewCount}</span>
           <span>喜欢{this.props.upVote}</span>
         </div>
-        <div dangerouslySetInnerHTML={{__html: converter.makeHtml(this.props.presentContent)}} />
+        <div className="markdown-body" dangerouslySetInnerHTML={{__html: converter.makeHtml(this.props.presentContent)}} />
         <ArticleComment
          articleId={this.props.params.id}
         />

@@ -39,7 +39,7 @@ function renderFullPage(renderedContent, initialState, head={
     <link rel="stylesheet" type="text/css" href="/modal.css" />
     <link rel="stylesheet" type="text/css" href="/md.css" />
     <link rel="stylesheet" type="text/css" href="/font-awesome-4.6.3/css/font-awesome.min.css" />
-    </body>
+
     </html>
 
   `;

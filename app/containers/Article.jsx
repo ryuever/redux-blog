@@ -8,7 +8,38 @@ import {updateArticleMeta} from '../actions/articleMeta'
 
 import showdown from 'showdown';
 
-const converter = new showdown.Converter();
+import hljs from 'highlight.js';
+
+// refer to https://github.com/showdownjs/showdown/issues/215
+showdown.extension('codehighlight', function() {
+  function htmlunencode(text) {
+    return (
+      text
+        .replace(/&amp;/g, '&')
+        .replace(/&lt;/g, '<')
+        .replace(/&gt;/g, '>')
+      );
+  }
+  return [
+    {
+      type: 'output',
+      filter: function (text, converter, options) {
+        // use new shodown's regexp engine to conditionally parse codeblocks
+        var left  = '<pre><code\\b[^>]*>',
+            right = '</code></pre>',
+            flags = 'g',
+            replacement = function (wholeMatch, match, left, right) {
+              // unescape match to prevent double escaping
+              match = htmlunencode(match);
+              return left + hljs.highlightAuto(match).value + right;
+            };
+        return showdown.helper.replaceRecursiveRegExp(text, replacement, left, right, flags);
+      }
+    }
+  ];
+});
+
+const converter = new showdown.Converter({extensions: ['codehighlight']});
 
 class Article extends Component {
   constructor(props){
@@ -26,6 +57,8 @@ class Article extends Component {
   }
 
   render(){
+    let convertedHtml = converter.makeHtml(this.props.presentContent || '');
+
     return(
       <section>
         <div dangerouslySetInnerHTML={{__html: converter.makeHtml(this.props.presentTitle)}} />
@@ -33,7 +66,8 @@ class Article extends Component {
           <span>浏览{this.props.viewCount}</span>
           <span>喜欢{this.props.upVote}</span>
         </div>
-        <div className="markdown-body" dangerouslySetInnerHTML={{__html: converter.makeHtml(this.props.presentContent)}} />
+
+        <div className="markdown-body" dangerouslySetInnerHTML={{__html: convertedHtml}} />
         <ArticleComment
          articleId={this.props.params.id}
         />

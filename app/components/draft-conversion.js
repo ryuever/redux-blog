@@ -42,6 +42,21 @@ function buildMarkdown(rawJSData, innerHTMLTags, blockHTMLTags){
     return multipleLine.type ? true : false;
   }
 
+  var typeSets = {
+    'code-block': {left: '', right: '', pleft: '<pre><code>', pright: '</code></pre>'},
+    'ordered-list-item': {left: '<li>', right: '</li>', pleft: '<ol>', pright: '</ol>'},
+    'unordered-list-item': {left: '<li>', right: '</li>', pleft: '<ul>', pright: '</ul>'},
+    'blockquote': {left: '', right: '', pleft: '<blockquote>', pright: '</blockquote>'}
+  };
+
+  var shouldIntegrateSelection = function(blockType) {
+    if (Object.keys(typeSets).indexOf(blockType) < 0) {
+      return false
+    } else {
+      return true;
+    }
+  }
+
   var newBlock = blocks.forEach(function(block) {
     var outputBlock = [];
 
@@ -50,17 +65,17 @@ function buildMarkdown(rawJSData, innerHTMLTags, blockHTMLTags){
     var styleRanges = block.inlineStyleRanges;
 
     if (!isMultiProcessing()) {
-      if (block.type === 'code-block') {
+      if (shouldIntegrateSelection(block.type)) {
         // multipleLine.content.push('```\n');
-        multipleLine.content.push('<pre><code>');
-        multipleLine.type = 'code-block';
+        multipleLine.content.push(typeSets[block.type].pleft);
+        multipleLine.type = block.type;
       }
     } else {
       // 上一次的连续结束
       if (block.type !== multipleLine.type) {
-        if (multipleLine.type === 'code-block') {
+        if (shouldIntegrateSelection(multipleLine.type)) {
           // multipleLine.content.push('\n```\n');
-          multipleLine.content.push('</code></pre>');
+          multipleLine.content.push(typeSets[multipleLine.type].pright);
         } else {
           multipleLine.content.push('\n');
         }
@@ -145,9 +160,9 @@ function buildMarkdown(rawJSData, innerHTMLTags, blockHTMLTags){
   });
 
   if (isMultiProcessing()) {
-    if (multipleLine.type === 'code-block') {
+    if (multipleLine.type) {
       // multipleLine.content.push(' \n```\n');
-      multipleLine.content.push('</code></pre>');
+      multipleLine.content.push(typeSets[multipleLine.type].pright);
       totalBlock.push(multipleLine.content.join(''));
 
       multipleLine.type = '';

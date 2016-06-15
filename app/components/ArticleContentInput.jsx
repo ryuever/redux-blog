@@ -38,7 +38,9 @@ export default class RichEditor extends React.Component {
       var blockTag = {
         'blockquote': ['<blockquote><p>', '</p></blockquote>'],
         'header-one': ['<h1>', '</h1>'],
-        'header-two': ['<h2>', '</h2>']
+        'header-two': ['<h2>', '</h2>'],
+        // 'code-block': ['<pre><code>', '</code></pre>']
+        'code-block': ['', '']
       }
 
       var markedUpBlocks = buildMarkdown(rawDraftContentBlock, markup, blockTag);
@@ -331,9 +333,6 @@ const InlineStyleControls = (props) => {
     </div>
   );
 };
-
-
-
 
 import {
   BlockMapBuilder,

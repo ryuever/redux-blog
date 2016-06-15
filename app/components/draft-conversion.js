@@ -28,33 +28,58 @@ function xcompare(a,b) {
   }
 }
 
-var innerHTMLTags = {
-  'BOLD': ['<strong>', '</strong>'],
-  'ITALIC': ['<em>', '</em>'],
-  'UNDERLINE': ['<b>', '</b>']
-}
-
-var blockHTMLTags = {
-  'blockquote': ['<blockquote><p>', '</p></blockquote>']
-}
-
 function buildMarkdown(rawJSData, innerHTMLTags, blockHTMLTags){
   var blocks = rawJSData.blocks;
 
-  var newBlock = blocks.map(function(block){
-    var blockPlainText = block.text;
-    var blockStyle = block.type;
+  var multipleLine = {
+    type: '',
+    content: []
+  }
 
+  var totalBlock = [];
+
+  var isMultiProcessing = function() {
+    return multipleLine.type ? true : false;
+  }
+
+  var newBlock = blocks.forEach(function(block) {
     var outputBlock = [];
 
+    // 每一行中的每一段inline style都会被解析成一个对象；一行可以是
+    // 多个inline style对象的数组
     var styleRanges = block.inlineStyleRanges;
 
+    if (!isMultiProcessing()) {
+      if (block.type === 'code-block') {
+        // multipleLine.content.push('```\n');
+        multipleLine.content.push('<pre><code>');
+        multipleLine.type = 'code-block';
+      }
+    } else {
+      // 上一次的连续结束
+      if (block.type !== multipleLine.type) {
+        if (multipleLine.type === 'code-block') {
+          // multipleLine.content.push('\n```\n');
+          multipleLine.content.push('</code></pre>');
+        } else {
+          multipleLine.content.push('\n');
+        }
+
+        totalBlock.push(multipleLine.content.join(''));
+
+        multipleLine.type = '';
+        multipleLine.content = [];
+      }
+    }
+
+    // 根据blockType来进行标签的替换，但是有个问题就是假如说是多行连续的code的话，需要被封装到
+    // 一个<pre><code>...</code></pre>, 但是最基础的<span>是不能能够更改；
     if (blockHTMLTags[block.type]) {
       outputBlock.push(blockHTMLTags[block.type][0]);
     } else if (block.type === 'image') {
       outputBlock.push('<img style= "max-width: 500px; max-height: 680px;" src="')
     } else {
-      outputBlock.push("<p>");
+      outputBlock.push("\n");
     }
 
     var styleRangesPosition = styleRanges.map(function(styleRange){
@@ -86,56 +111,51 @@ function buildMarkdown(rawJSData, innerHTMLTags, blockHTMLTags){
     var previousPosition = 0;
 
     for (var position in tmp){
-      // console.log('tm postion ', tmp[position], position);
-
-      // if (tmp[position].right != [] && tmp[position].right !='undefined')
-      //   console.log('pp ', tmp[position].right);
-
       currentPosition = position;
       outputBlock.push(block.text.substr(previousPosition, currentPosition-previousPosition ));
       previousPosition = currentPosition;
 
       while (tmp[position].hasOwnProperty('right') && tmp[position].right.length > 0){
-        // console.log('pp ', tmp[position].right);
-        // console.log('haha : ', position, tmp[position].right.pop());
         outputBlock.push(tmp[position].right.pop());
       }
 
       while (tmp[position].hasOwnProperty('left') && tmp[position].left.length > 0){
-        // console.log('pp ', tmp[position].right);
-        // console.log('haha : ', position, tmp[position].left.shift());
         outputBlock.push(tmp[position].left.shift());
       }
-
-
-      // while (tmp[position].right != [] && tmp[position].right){
-      //   console.log('me ', tmp[position].right);
-      //   console.log('haha : ', tmp[position], tmp[position].right.pop());
-      // }
-      // while (tmp[position].left != [] && tmp[position].left);
-      //   console.log('hahah : ', tmp[position], tmp[position].left.shift());
     }
 
     if (currentPosition < block.text.length)
       outputBlock.push(block.text.substr(currentPosition, block.text.length - currentPosition));
 
-    // sortByLeftTag.map(function(rightTag){
-    //   tmp[rightTag.endPosition.toString()].right.push(innerHTMLTags[rightTag.style][1]);
-    // })
-    // console.log('tmp after right : ', tmp);
-
     // finally
     if (blockHTMLTags[block.type]) {
       outputBlock.push(blockHTMLTags[block.type][1]);
-    } else if (block.type ==='image') {
-      outputBlock.push('">');
+      outputBlock.push('\n');
+    } else if (block.type === 'image') {
+      outputBlock.push('">\n');
     } else {
-      outputBlock.push("</p>");
+      outputBlock.push("\n");
     }
-    return outputBlock.join('');
+
+    if (isMultiProcessing()) {
+      multipleLine.content.push(outputBlock.join(''))
+    } else {
+      totalBlock.push(outputBlock.join(''));
+    }
   });
 
-  return newBlock.join('');
+  if (isMultiProcessing()) {
+    if (multipleLine.type === 'code-block') {
+      // multipleLine.content.push(' \n```\n');
+      multipleLine.content.push('</code></pre>');
+      totalBlock.push(multipleLine.content.join(''));
+
+      multipleLine.type = '';
+      multipleLine.content = [];
+    }
+  }
+
+  return totalBlock.join('');
 }
 
 module.exports = buildMarkdown;
